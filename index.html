@@ -51,7 +51,7 @@
   @keyframes pulse{0%,100%{opacity:.5;}50%{opacity:1;}}
   @keyframes blink{0%,100%{opacity:1;}50%{opacity:0.15;}}
   .nav-burger{display:none;}
-  @media (max-width:880px){ .nav-links{display:none !important;} .nav-burger{display:flex !important;} }
+  @media (max-width:880px){ .nav-links{display:none !important;} .nav-explore{display:none !important;} .nav-burger{display:flex !important;} }
   @media (max-width:680px){ .nav-cta-label{display:none !important;} }
   @media (prefers-reduced-motion:reduce){ *{animation:none !important;} }
 </style>
@@ -65,13 +65,19 @@
       <img src="assets/logo_full.png" alt="Tasks.AI" style="height:42px;width:auto;display:block;margin:2px 0;" />
     </a>
     <div class="nav-links" style="display:flex;align-items:center;gap:2px;font-size:14.5px;color:var(--dim);font-weight:500;">
-      <div onMouseEnter="{{ megaOn }}" onMouseLeave="{{ megaOff }}" style="position:relative;">
-        <button onClick="{{ megaToggle }}" style="display:inline-flex;align-items:center;gap:7px;cursor:pointer;border:1px solid transparent;background:transparent;font-family:var(--body);font-weight:500;font-size:14.5px;color:var(--text);padding:9px 14px;border-radius:11px;transition:background .15s,border-color .15s;" onMouseEnter="{{ megaItemOn }}" onMouseLeave="{{ megaItemOff }}">
-          Explore the page <span style="font-size:10px;opacity:.65;transform:translateY(1px);">▼</span>
+      <a href="#problem" style="padding:9px 13px;border-radius:11px;transition:color .15s;" onMouseEnter="{{ linkOn }}" onMouseLeave="{{ linkOff }}">Why</a>
+      <a href="#how" style="padding:9px 13px;border-radius:11px;transition:color .15s;" onMouseEnter="{{ linkOn }}" onMouseLeave="{{ linkOff }}">How it works</a>
+      <a href="#proof" style="padding:9px 13px;border-radius:11px;transition:color .15s;" onMouseEnter="{{ linkOn }}" onMouseLeave="{{ linkOff }}">Proof</a>
+      <a href="#usecases" style="padding:9px 13px;border-radius:11px;transition:color .15s;" onMouseEnter="{{ linkOn }}" onMouseLeave="{{ linkOff }}">Use cases</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:11px;">
+      <div class="nav-explore" onMouseEnter="{{ megaOn }}" onMouseLeave="{{ megaOff }}" style="position:relative;">
+        <button onClick="{{ megaToggle }}" style="display:inline-flex;align-items:center;gap:7px;cursor:pointer;border:1px solid var(--hairline);background:var(--surface-2);font-family:var(--body);font-weight:500;font-size:14.5px;color:var(--text);padding:10px 16px;border-radius:12px;transition:background .15s,border-color .15s;" onMouseEnter="{{ megaItemOn }}" onMouseLeave="{{ megaItemOff }}">
+          Explore <span style="font-size:10px;opacity:.65;transform:translateY(1px);">▼</span>
         </button>
         <sc-if value="{{ megaOpen }}" hint-placeholder-val="{{ false }}">
-          <div style="position:absolute;top:100%;left:0;padding-top:14px;">
-            <div style="position:relative;width:min(720px,calc(100vw - 270px));border:1px solid var(--hairline);border-radius:20px;background:linear-gradient(180deg,rgba(22,23,38,0.985),rgba(12,12,21,0.99));backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 30px 90px rgba(0,0,0,0.6);padding:24px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px 22px;animation:fadeIn .18s ease;">
+          <div style="position:absolute;top:100%;right:0;padding-top:14px;">
+            <div style="position:relative;width:min(720px,calc(100vw - 80px));border:1px solid var(--hairline);border-radius:20px;background:linear-gradient(180deg,rgba(22,23,38,0.985),rgba(12,12,21,0.99));backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 30px 90px rgba(0,0,0,0.6);padding:24px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px 22px;animation:fadeIn .18s ease;">
               <div aria-hidden="true" style="position:absolute;top:0;left:24px;right:24px;height:1px;background:var(--grad);opacity:0.55;"></div>
               <sc-for list="{{ megaGroups }}" as="g" hint-placeholder-count="3">
                 <div>
@@ -90,11 +96,6 @@
           </div>
         </sc-if>
       </div>
-      <a href="#how" style="padding:9px 13px;border-radius:11px;transition:color .15s;" onMouseEnter="{{ linkOn }}" onMouseLeave="{{ linkOff }}">How it works</a>
-      <a href="#usecases" style="padding:9px 13px;border-radius:11px;transition:color .15s;" onMouseEnter="{{ linkOn }}" onMouseLeave="{{ linkOff }}">Use cases</a>
-      <a href="#marketplace" style="padding:9px 13px;border-radius:11px;transition:color .15s;" onMouseEnter="{{ linkOn }}" onMouseLeave="{{ linkOff }}">Marketplace</a>
-    </div>
-    <div style="display:flex;align-items:center;gap:11px;">
       <button onClick="{{ openModal }}" style="border:none;cursor:pointer;font-family:var(--body);font-weight:600;font-size:14.5px;color:#fff;background:var(--grad);padding:11px 20px;border-radius:13px;box-shadow:0 6px 22px rgba(104,123,250,0.28);transition:transform .18s ease,box-shadow .18s ease;" onMouseEnter="{{ btnOn }}" onMouseLeave="{{ btnOff }}">Get Early Access</button>
       <button class="nav-burger" onClick="{{ mobileToggle }}" aria-label="Menu" style="display:none;align-items:center;justify-content:center;width:42px;height:42px;border-radius:12px;border:1px solid var(--hairline);background:var(--surface-2);cursor:pointer;color:var(--text);">
         <span style="position:relative;display:block;width:18px;height:12px;">
@@ -110,19 +111,12 @@
   <sc-if value="{{ mobileOpen }}" hint-placeholder-val="{{ false }}">
     <div style="position:fixed;inset:0;z-index:95;background:radial-gradient(120% 80% at 50% 0%, #11132a 0%, #08080f 62%);backdrop-filter:blur(8px);animation:fadeIn .2s ease;display:flex;flex-direction:column;padding:80px clamp(22px,7vw,40px) 34px;overflow-y:auto;">
       <button onClick="{{ mobileClose }}" aria-label="Close" style="position:absolute;top:15px;right:clamp(18px,5vw,40px);width:42px;height:42px;border-radius:12px;border:1px solid var(--hairline);background:var(--surface-2);color:var(--text);font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;">✕</button>
-      <div style="display:flex;flex-direction:column;gap:24px;flex:1;">
-        <sc-for list="{{ megaGroups }}" as="g" hint-placeholder-count="3">
-          <div>
-            <div style="font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--faint);margin:0 0 8px;">{{ g.title }}</div>
-            <div style="display:flex;flex-direction:column;">
-              <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="3">
-                <a href="{{ it.href }}" onClick="{{ mobileClose }}" style="display:flex;align-items:baseline;justify-content:space-between;gap:14px;padding:13px 2px;border-bottom:1px solid var(--hairline);">
-                  <span style="font-family:var(--disp);font-weight:600;font-size:18px;color:var(--text);">{{ it.label }}</span>
-                  <span style="font-size:12px;color:var(--faint);text-align:right;max-width:48%;line-height:1.35;">{{ it.desc }}</span>
-                </a>
-              </sc-for>
-            </div>
-          </div>
+      <div style="display:flex;flex-direction:column;gap:2px;flex:1;">
+        <sc-for list="{{ mobileLinks }}" as="it" hint-placeholder-count="4">
+          <a href="{{ it.href }}" onClick="{{ mobileClose }}" style="display:flex;align-items:baseline;justify-content:space-between;gap:14px;padding:18px 2px;border-bottom:1px solid var(--hairline);">
+            <span style="font-family:var(--disp);font-weight:600;font-size:22px;color:var(--text);">{{ it.label }}</span>
+            <span style="font-size:13px;color:var(--faint);text-align:right;max-width:50%;line-height:1.35;">{{ it.desc }}</span>
+          </a>
         </sc-for>
       </div>
       <button onClick="{{ openModalFromMobile }}" style="margin-top:26px;border:none;cursor:pointer;font-family:var(--body);font-weight:600;font-size:17px;color:#fff;background:var(--grad);padding:16px;border-radius:15px;box-shadow:0 12px 36px rgba(104,123,250,0.4);width:100%;">Get Early Access</button>
@@ -196,7 +190,7 @@
 
 
   <!-- 2. MISSION BAND -->
-  <section style="position:relative;background:var(--bg-deep);padding:clamp(86px,12vw,150px) clamp(20px,5vw,56px);overflow:hidden;">
+  <section id="mission" style="position:relative;background:var(--bg-deep);padding:clamp(86px,12vw,150px) clamp(20px,5vw,56px);overflow:hidden;scroll-margin-top:74px;">
     <div aria-hidden="true" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60vw;height:60vw;max-width:900px;max-height:900px;background:radial-gradient(circle,rgba(104,123,250,0.10),transparent 65%);pointer-events:none;"></div>
     <div style="position:relative;max-width:980px;margin:0 auto;text-align:center;">
       <div data-reveal style="display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--faint);margin-bottom:26px;">
@@ -501,6 +495,10 @@
           <img src="assets/logo_full.png" alt="Tasks.AI" style="height:28px;width:auto;display:block;" />
         </a>
         <p style="font-size:14px;line-height:1.6;color:var(--faint);margin:0;">The operating system for digital coworkers. Teach once, automate forever — locally, privately, on your own accounts.</p>
+        <div style="display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:7px 12px;border:1px solid var(--hairline);border-radius:10px;background:var(--surface);">
+          <span style="display:inline-flex;color:#9fb6ff;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.4-3 7.8-7 9-4-1.2-7-4.6-7-9V6l7-3Z"></path><path d="M9.5 12l1.8 1.8L15 10"></path></svg></span>
+          <span style="font-size:12.5px;color:var(--dim);white-space:nowrap;">Backed by a filed provisional patent <span style="color:var(--faint);">(priority date January 23, 2026)</span>.</span>
+        </div>
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:40px 64px;">
         <div style="display:flex;flex-direction:column;gap:12px;">
@@ -817,23 +815,30 @@ class Component extends DCLogic {
       megaOn:this.megaOn, megaOff:this.megaOff, megaToggle:this.megaToggle,
       mobileToggle:this.mobileToggle, mobileClose:this.mobileClose, openModalFromMobile:this.openModalFromMobile,
       megaItemOn:this.megaItemOn, megaItemOff:this.megaItemOff,
+      mobileLinks:[
+        {label:'Why', href:'#problem', desc:'The problem we solve'},
+        {label:'How it works', href:'#how', desc:'Show it once, it runs forever'},
+        {label:'Proof', href:'#proof', desc:'A working system, today'},
+        {label:'Use cases', href:'#usecases', desc:'Who it\u2019s for'}
+      ],
       megaGroups:[
-        {title:'Why it exists', items:[
+        {title:'Why it matters', items:[
+          {label:'Mission', href:'#mission', desc:'Why we\u2019re building this'},
           {label:'The problem', href:'#problem', desc:'Why the work can\u2019t get automated'},
           {label:'The idea', href:'#idea', desc:'Teaching, not coding'},
-          {label:'The ambition', href:'#vision', desc:'An OS for digital coworkers'}
+          {label:'The vision', href:'#vision', desc:'An OS for digital coworkers'}
         ]},
-        {title:'How it works', items:[
+        {title:'The product', items:[
           {label:'How it works', href:'#how', desc:'Show it once, it runs forever'},
           {label:'Proof', href:'#proof', desc:'A working system, today'},
-          {label:'Digital coworkers', href:'#coworkers', desc:'They work with you, not instead of you'},
+          {label:'Digital coworkers', href:'#coworkers', desc:'They work with you, not for you'},
           {label:'Why trust it', href:'#trust', desc:'Auditable, repeatable, local'},
-          {label:'What makes us different', href:'#different', desc:'Beyond APIs, RPA and cloud agents'}
+          {label:'What\u2019s different', href:'#different', desc:'Beyond APIs, RPA and cloud agents'}
         ]},
         {title:'For your team', items:[
           {label:'Use cases', href:'#usecases', desc:'Built for the work that runs the business'},
           {label:'Your know-how', href:'#knowhow', desc:'The asset you capture and keep'},
-          {label:'Marketplace', href:'#marketplace', desc:'An App Store for work'}
+          {label:'Marketplace', href:'#marketplace', desc:'An app store for work'}
         ]}
       ],
       trustChips:["Teach, don't code","Runs on your machine","100% auditable","You own it"],
