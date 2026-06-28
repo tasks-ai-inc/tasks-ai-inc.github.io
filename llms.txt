@@ -1,0 +1,28 @@
+# Tasks.AI
+
+> Teach once. Automate forever. Tasks.AI changes the unit of automation from code
+> to demonstration: show a digital coworker how you do a browser task once, and it
+> does it for you forever — in your own browser, on your own accounts, with your
+> data and know-how staying yours.
+
+## What it is
+- Teach by demonstration (record a task while you talk through it), it learns the
+  goal, then runs hands-free — and self-heals when sites change.
+- Learn a task once (~$1, ~90s); replay it for free, for life, because it runs
+  locally on your machine.
+- Built on trust, not hope: you taught it, you can watch every step, it's verified,
+  repeatable, local, and yours to keep, edit, and share.
+- For the browser work that runs the business — finance, operations, RevOps, HR,
+  support — and anyone who can do the job in a browser.
+
+## Mission
+Make agentic AI accessible to everyone, so every company can capture, protect, and
+grow the know-how that makes it valuable.
+
+## Status
+Pre-launch. A skills marketplace ("an app store for work") is coming. Backed by a
+filed provisional patent (priority date January 23, 2026).
+
+## Links
+- Site: https://tasks-ai-inc.github.io/
+- Contact: hello@tasks.ai

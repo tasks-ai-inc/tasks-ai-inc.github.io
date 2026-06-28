@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<title>Tasks.AI — Teach once. Automate forever.</title>
+<meta name="description" content="Teach a digital coworker to do your browser work by showing it once — then it runs forever, locally, with your data and know-how staying yours.">
+<link rel="canonical" href="https://tasks-ai-inc.github.io/">
+<meta name="robots" content="index, follow">
+<link rel="icon" type="image/png" href="assets/logo_mark_transparent.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tasks.AI">
+<meta property="og:title" content="Tasks.AI — Teach once. Automate forever.">
+<meta property="og:description" content="Teach a digital coworker to do your browser work by showing it once — then it runs forever, locally, with your data and know-how staying yours.">
+<meta property="og:url" content="https://tasks-ai-inc.github.io/">
+<meta property="og:image" content="https://tasks-ai-inc.github.io/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tasks.AI — Teach once. Automate forever.">
+<meta name="twitter:description" content="Teach a digital coworker to do your browser work by showing it once — then it runs forever, locally, with your data and know-how staying yours.">
+<meta name="twitter:image" content="https://tasks-ai-inc.github.io/assets/og-cover.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Tasks.AI", "url": "https://tasks-ai-inc.github.io/", "description": "Teach a digital coworker to do your browser work by showing it once — then it runs forever, locally, with your data and know-how staying yours.", "inLanguage": "en"}</script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0B14; --bg-deep:#08080F; --surface:#12131F; --surface-2:rgba(255,255,255,0.035);
+    --hairline:rgba(255,255,255,0.09); --text:#F4F4F8; --dim:#9A9DAD; --faint:#6B6E7D;
+    --accent:#7B6CFF; --grad:linear-gradient(100deg,#38C6F4 0%,#6B7BFA 46%,#A857F2 100%);
+    --disp:'Space Grotesk',system-ui,sans-serif; --body:'Manrope',system-ui,sans-serif; --mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  ::selection{background:rgba(123,108,255,0.32);color:#fff;}
+  a{color:inherit;text-decoration:none;}
+  @keyframes drift{0%{transform:translate(-4%,-2%) scale(1);}50%{transform:translate(4%,3%) scale(1.08);}100%{transform:translate(-4%,-2%) scale(1);}}
+  @keyframes drift2{0%{transform:translate(3%,2%) scale(1.05);}50%{transform:translate(-3%,-3%) scale(1);}100%{transform:translate(3%,2%) scale(1.05);}}
+  @keyframes floaty{0%{transform:translateY(0);}50%{transform:translateY(-12px);}100%{transform:translateY(0);}}
+  @keyframes spinslow{to{transform:rotate(360deg);}}
+  @keyframes pulse{0%,100%{opacity:.5;}50%{opacity:1;}}
+  @keyframes blink{0%,100%{opacity:1;}50%{opacity:0.15;}}
+  .nav-burger{display:none;}
+  @media (max-width:880px){ .nav-links{display:none !important;} .nav-burger{display:flex !important;} }
+  @media (max-width:680px){ .nav-cta-label{display:none !important;} }
+  @media (prefers-reduced-motion:reduce){ *{animation:none !important;} }
+</style>
+</helmet>
+
+<div style="position:relative;width:100%;overflow-x:hidden;background:var(--bg);">
+
+  <!-- NAV -->
+  <nav ref="{{ navRef }}" style="position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:13px clamp(20px,5vw,56px);background:rgba(9,9,17,0.86);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--hairline);transition:box-shadow .3s ease;">
+    <a href="#top" style="display:flex;align-items:center;gap:11px;">
+      <img src="assets/logo_mark_transparent.png" alt="TasksAI" style="height:30px;width:auto;display:block;" />
+      <span style="font-family:var(--disp);font-weight:600;font-size:20px;letter-spacing:-0.01em;">TasksAI</span>
+    </a>
+    <div class="nav-links" style="display:flex;align-items:center;gap:2px;font-size:14.5px;color:var(--dim);font-weight:500;">
+      <div onMouseEnter="{{ megaOn }}" onMouseLeave="{{ megaOff }}" style="position:relative;">
+        <button onClick="{{ megaToggle }}" style="display:inline-flex;align-items:center;gap:7px;cursor:pointer;border:1px solid transparent;background:transparent;font-family:var(--body);font-weight:500;font-size:14.5px;color:var(--text);padding:9px 14px;border-radius:11px;transition:background .15s,border-color .15s;" onMouseEnter="{{ megaItemOn }}" onMouseLeave="{{ megaItemOff }}">
+          Explore the page <span style="font-size:10px;opacity:.65;transform:translateY(1px);">▼</span>
+        </button>
+        <sc-if value="{{ megaOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;top:100%;left:0;padding-top:14px;">
+            <div style="position:relative;width:min(720px,calc(100vw - 270px));border:1px solid var(--hairline);border-radius:20px;background:linear-gradient(180deg,rgba(22,23,38,0.985),rgba(12,12,21,0.99));backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 30px 90px rgba(0,0,0,0.6);padding:24px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px 22px;animation:fadeIn .18s ease;">
+              <div aria-hidden="true" style="position:absolute;top:0;left:24px;right:24px;height:1px;background:var(--grad);opacity:0.55;"></div>
+              <sc-for list="{{ megaGroups }}" as="g" hint-placeholder-count="3">
+                <div>
+                  <div style="font-family:var(--mono);font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--faint);margin:0 0 8px;padding:0 10px;">{{ g.title }}</div>
+                  <div style="display:flex;flex-direction:column;gap:1px;">
+                    <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="3">
+                      <a href="{{ it.href }}" onClick="{{ megaOff }}" style="display:block;padding:8px 10px;border-radius:11px;transition:background .14s;" onMouseEnter="{{ megaItemOn }}" onMouseLeave="{{ megaItemOff }}">
+                        <div style="font-family:var(--disp);font-weight:600;font-size:14px;color:var(--text);margin-bottom:1px;">{{ it.label }}</div>
+                        <div style="font-size:12px;color:var(--faint);line-height:1.4;">{{ it.desc }}</div>
+                      </a>
+                    </sc-for>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+      <a href="#how" style="padding:9px 13px;border-radius:11px;transition:color .15s;" onMouseEnter="{{ linkOn }}" onMouseLeave="{{ linkOff }}">How it works</a>
+      <a href="#usecases" style="padding:9px 13px;border-radius:11px;transition:color .15s;" onMouseEnter="{{ linkOn }}" onMouseLeave="{{ linkOff }}">Use cases</a>
+      <a href="#marketplace" style="padding:9px 13px;border-radius:11px;transition:color .15s;" onMouseEnter="{{ linkOn }}" onMouseLeave="{{ linkOff }}">Marketplace</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:11px;">
+      <button onClick="{{ openModal }}" style="border:none;cursor:pointer;font-family:var(--body);font-weight:600;font-size:14.5px;color:#fff;background:var(--grad);padding:11px 20px;border-radius:13px;box-shadow:0 6px 22px rgba(104,123,250,0.28);transition:transform .18s ease,box-shadow .18s ease;" onMouseEnter="{{ btnOn }}" onMouseLeave="{{ btnOff }}">Get Early Access</button>
+      <button class="nav-burger" onClick="{{ mobileToggle }}" aria-label="Menu" style="display:none;align-items:center;justify-content:center;width:42px;height:42px;border-radius:12px;border:1px solid var(--hairline);background:var(--surface-2);cursor:pointer;color:var(--text);">
+        <span style="position:relative;display:block;width:18px;height:12px;">
+          <span style="position:absolute;top:0;left:0;width:100%;height:2px;border-radius:2px;background:currentColor;"></span>
+          <span style="position:absolute;top:5px;left:0;width:100%;height:2px;border-radius:2px;background:currentColor;"></span>
+          <span style="position:absolute;top:10px;left:0;width:100%;height:2px;border-radius:2px;background:currentColor;"></span>
+        </span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU SHEET -->
+  <sc-if value="{{ mobileOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:95;background:radial-gradient(120% 80% at 50% 0%, #11132a 0%, #08080f 62%);backdrop-filter:blur(8px);animation:fadeIn .2s ease;display:flex;flex-direction:column;padding:80px clamp(22px,7vw,40px) 34px;overflow-y:auto;">
+      <button onClick="{{ mobileClose }}" aria-label="Close" style="position:absolute;top:15px;right:clamp(18px,5vw,40px);width:42px;height:42px;border-radius:12px;border:1px solid var(--hairline);background:var(--surface-2);color:var(--text);font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;">✕</button>
+      <div style="display:flex;flex-direction:column;gap:24px;flex:1;">
+        <sc-for list="{{ megaGroups }}" as="g" hint-placeholder-count="3">
+          <div>
+            <div style="font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--faint);margin:0 0 8px;">{{ g.title }}</div>
+            <div style="display:flex;flex-direction:column;">
+              <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="3">
+                <a href="{{ it.href }}" onClick="{{ mobileClose }}" style="display:flex;align-items:baseline;justify-content:space-between;gap:14px;padding:13px 2px;border-bottom:1px solid var(--hairline);">
+                  <span style="font-family:var(--disp);font-weight:600;font-size:18px;color:var(--text);">{{ it.label }}</span>
+                  <span style="font-size:12px;color:var(--faint);text-align:right;max-width:48%;line-height:1.35;">{{ it.desc }}</span>
+                </a>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <button onClick="{{ openModalFromMobile }}" style="margin-top:26px;border:none;cursor:pointer;font-family:var(--body);font-weight:600;font-size:17px;color:#fff;background:var(--grad);padding:16px;border-radius:15px;box-shadow:0 12px 36px rgba(104,123,250,0.4);width:100%;">Get Early Access</button>
+    </div>
+  </sc-if>
+
+  <!-- HERO -->
+  <header id="top" style="position:relative;min-height:100vh;display:flex;align-items:center;background:radial-gradient(120% 90% at 50% -10%, #0f1020 0%, var(--bg-deep) 55%, var(--bg) 100%);padding:140px clamp(20px,5vw,56px) 90px;overflow:hidden;">
+    <div aria-hidden="true" style="position:absolute;top:-12%;left:8%;width:54vw;height:54vw;max-width:760px;max-height:760px;background:radial-gradient(circle, rgba(56,198,244,0.20), transparent 62%);filter:blur(20px);animation:drift 16s ease-in-out infinite;pointer-events:none;"></div>
+    <div aria-hidden="true" style="position:absolute;bottom:-18%;right:2%;width:50vw;height:50vw;max-width:720px;max-height:720px;background:radial-gradient(circle, rgba(168,87,242,0.18), transparent 64%);filter:blur(20px);animation:drift2 19s ease-in-out infinite;pointer-events:none;"></div>
+    <div aria-hidden="true" style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(120% 80% at 50% 30%,#000 30%,transparent 78%);-webkit-mask-image:radial-gradient(120% 80% at 50% 30%,#000 30%,transparent 78%);pointer-events:none;"></div>
+
+    <div style="position:relative;width:100%;max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:clamp(36px,5vw,72px);">
+      <div style="flex:1 1 460px;min-width:300px;">
+        <div data-reveal style="display:inline-flex;align-items:center;gap:9px;padding:7px 14px;border:1px solid var(--hairline);border-radius:999px;background:var(--surface-2);font-size:13px;color:var(--faint);letter-spacing:0.02em;margin-bottom:28px;">
+          <span style="width:7px;height:7px;border-radius:50%;background:var(--grad);box-shadow:0 0 10px rgba(123,108,255,0.7);"></span>
+          From vibe-coding to vibe-working
+        </div>
+        <h1 data-reveal style="font-family:var(--disp);font-weight:600;font-size:clamp(44px,6.6vw,86px);line-height:1.02;letter-spacing:-0.025em;margin:0 0 26px;">
+          Teach once.<br><span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;">Automate forever.</span>
+        </h1>
+        <p data-reveal style="font-size:clamp(17px,1.4vw,19px);line-height:1.62;color:var(--dim);max-width:540px;margin:0 0 36px;">
+          Automating work has always meant writing software. Tasks.AI changes the unit of automation from <span style="color:var(--text);font-weight:600;">code</span> to <span style="color:var(--text);font-weight:600;">demonstration</span>. Show a digital coworker how you do a job — once — and it does it for you, forever: in your own browser, on your own accounts, with your data and know-how staying yours.
+        </p>
+        <div data-reveal style="display:flex;flex-wrap:wrap;gap:14px;margin-bottom:34px;">
+          <button onClick="{{ openModal }}" style="border:none;cursor:pointer;font-family:var(--body);font-weight:600;font-size:16px;color:#fff;background:var(--grad);padding:15px 28px;border-radius:15px;box-shadow:0 10px 34px rgba(104,123,250,0.32);display:inline-flex;align-items:center;gap:10px;transition:transform .18s ease,box-shadow .18s ease;" onMouseEnter="{{ btnOn }}" onMouseLeave="{{ btnOff }}">Get Early Access <span style="font-size:18px;">→</span></button>
+          <a href="#how" style="font-family:var(--body);font-weight:600;font-size:16px;color:var(--text);padding:15px 26px;border-radius:15px;border:1px solid var(--hairline);background:var(--surface-2);display:inline-flex;align-items:center;gap:9px;transition:border-color .18s,background .18s;" onMouseEnter="{{ ghostOn }}" onMouseLeave="{{ ghostOff }}">See how it works <span style="font-size:15px;">↓</span></a>
+        </div>
+        <div data-reveal style="display:flex;flex-wrap:wrap;gap:10px 22px;">
+          <sc-for list="{{ trustChips }}" as="chip" hint-placeholder-count="4">
+            <span style="display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--faint);">
+              <span style="color:#5fd0ef;font-weight:700;">✓</span>{{ chip }}
+            </span>
+          </sc-for>
+        </div>
+      </div>
+
+      <!-- hero visual: demo card -->
+      <div data-reveal style="flex:1 1 420px;min-width:300px;display:flex;justify-content:center;">
+        <div style="position:relative;width:100%;max-width:460px;">
+          <div aria-hidden="true" style="position:absolute;inset:-30px;background:radial-gradient(circle at 50% 40%,rgba(104,123,250,0.28),transparent 68%);filter:blur(10px);"></div>
+          <div style="position:relative;border:1px solid var(--hairline);border-radius:22px;background:linear-gradient(180deg,rgba(20,21,34,0.9),rgba(12,12,22,0.9));backdrop-filter:blur(8px);padding:26px 24px 28px;box-shadow:0 30px 80px rgba(0,0,0,0.5);overflow:hidden;">
+            <div style="position:absolute;top:0;left:0;right:0;height:1px;background:var(--grad);opacity:0.7;"></div>
+            <div style="display:flex;align-items:center;justify-content:center;margin:6px 0 22px;">
+              <img src="assets/logo_mark_transparent.png" alt="" style="height:74px;width:auto;filter:drop-shadow(0 10px 30px rgba(104,123,250,0.45));animation:floaty 7s ease-in-out infinite;" />
+            </div>
+            <div ref="{{ stepsRef }}" style="display:flex;flex-direction:column;gap:10px;">
+              <sc-for list="{{ demoSteps }}" as="s" hint-placeholder-count="3">
+                <div style="display:flex;align-items:flex-start;gap:14px;padding:14px 16px;border-radius:14px;border:1px solid var(--hairline);background:var(--surface-2);transition:border-color .4s,background .4s,box-shadow .4s;" data-step="{{ s.i }}">
+                  <span style="flex:none;width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:13px;color:#cfd2ff;background:rgba(123,108,255,0.14);border:1px solid rgba(123,108,255,0.25);" data-num="{{ s.i }}">{{ s.n }}</span>
+                  <div>
+                    <div style="font-family:var(--disp);font-weight:600;font-size:15.5px;margin-bottom:3px;">{{ s.title }}</div>
+                    <div style="font-size:13px;color:var(--dim);line-height:1.45;">{{ s.desc }}</div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:18px;padding-top:16px;border-top:1px solid var(--hairline);">
+              <span style="display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;color:var(--faint);">
+                <span style="width:8px;height:8px;border-radius:50%;background:#ff5f57;animation:blink 1.6s ease-in-out infinite;"></span>recording → replay
+              </span>
+              <span style="font-family:var(--mono);font-size:11.5px;color:#5fd0ef;">$0 / run</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+  <!-- 2. MISSION BAND -->
+  <section style="position:relative;background:var(--bg-deep);padding:clamp(86px,12vw,150px) clamp(20px,5vw,56px);overflow:hidden;">
+    <div aria-hidden="true" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60vw;height:60vw;max-width:900px;max-height:900px;background:radial-gradient(circle,rgba(104,123,250,0.10),transparent 65%);pointer-events:none;"></div>
+    <div style="position:relative;max-width:980px;margin:0 auto;text-align:center;">
+      <div data-reveal style="display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--faint);margin-bottom:26px;">
+        <span style="width:6px;height:6px;border-radius:50%;background:var(--grad);"></span>Our mission
+      </div>
+      <p data-reveal style="font-family:var(--disp);font-weight:500;font-size:clamp(26px,3.6vw,46px);line-height:1.22;letter-spacing:-0.02em;margin:0 0 30px;">
+        Make agentic AI accessible to everyone — so every company can capture, protect, and grow the <span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;">know-how that makes it valuable.</span>
+      </p>
+      <p data-reveal style="font-size:clamp(16px,1.4vw,19px);line-height:1.65;color:var(--dim);max-width:760px;margin:0 auto;">
+        Coding changed who could build software. <span style="color:var(--text);font-weight:600;">Demonstration changes who can build an automated workforce.</span> Just as vibe-coding put software in everyone's hands, vibe-working puts a tireless coworker in yours — and turns your team's hard-won expertise into something you own, and keep.
+      </p>
+    </div>
+  </section>
+
+  <!-- 3. THE PROBLEM -->
+  <section id="problem" style="position:relative;background:var(--bg);padding:clamp(80px,11vw,150px) clamp(20px,5vw,56px);scroll-margin-top:74px;">
+    <div style="max-width:1160px;margin:0 auto;">
+      <div data-reveal style="font-family:var(--mono);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--faint);margin-bottom:18px;">The problem</div>
+      <h2 data-reveal style="font-family:var(--disp);font-weight:600;font-size:clamp(30px,4.4vw,52px);line-height:1.08;letter-spacing:-0.022em;margin:0 0 22px;max-width:900px;">The people who know the work can't code the work.</h2>
+      <p data-reveal style="font-size:clamp(16px,1.35vw,18px);line-height:1.62;color:var(--dim);max-width:760px;margin:0 0 52px;">
+        Around <span style="color:var(--text);font-weight:600;">a billion knowledge workers</span> spend ~30% of their day on the same browser chores — pulling a report from a portal, copying data between an ERP and a CRM, reconciling an invoice, cleaning an inbox. They know exactly <em>how</em> to do it. They just can't automate it.
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;">
+        <sc-for list="{{ problemTiles }}" as="t" hint-placeholder-count="3">
+          <div data-reveal style="border:1px solid var(--hairline);border-radius:18px;background:var(--surface-2);padding:26px 24px;transition:border-color .25s,background .25s;" onMouseEnter="{{ cardOn }}" onMouseLeave="{{ cardOff }}">
+            <div style="width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:rgba(123,108,255,0.12);border:1px solid rgba(123,108,255,0.22);margin-bottom:18px;font-size:18px;">{{ t.icon }}</div>
+            <div style="font-family:var(--disp);font-weight:600;font-size:18px;margin-bottom:9px;">{{ t.title }}</div>
+            <div style="font-size:14.5px;line-height:1.55;color:var(--dim);">{{ t.body }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <p data-reveal style="margin:40px 0 0;font-size:15px;line-height:1.6;color:var(--faint);max-width:820px;border-left:2px solid var(--hairline);padding-left:20px;">
+        Even "no-code" tools (Zapier, Make, n8n) still demand technical thinking. And cloud AI agents ask you to hand over your passwords and send your data — and your know-how — outside your walls.
+      </p>
+    </div>
+  </section>
+
+  <!-- 4. MANIFESTO -->
+  <section id="idea" style="position:relative;background:var(--bg-deep);padding:clamp(90px,13vw,170px) clamp(20px,5vw,56px);scroll-margin-top:74px;overflow:hidden;">
+    <div aria-hidden="true" style="position:absolute;bottom:-10%;right:-5%;width:46vw;height:46vw;max-width:640px;max-height:640px;background:radial-gradient(circle,rgba(168,87,242,0.12),transparent 66%);pointer-events:none;"></div>
+    <div style="position:relative;max-width:1000px;margin:0 auto;">
+      <div data-reveal style="font-family:var(--mono);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--faint);margin-bottom:22px;">The idea</div>
+      <h2 data-reveal style="font-family:var(--disp);font-weight:600;font-size:clamp(34px,5.2vw,64px);line-height:1.05;letter-spacing:-0.025em;margin:0 0 34px;max-width:880px;">Teaching is natural.<br>Coding is not.</h2>
+      <p data-reveal style="font-size:clamp(17px,1.5vw,21px);line-height:1.65;color:var(--dim);max-width:760px;margin:0 0 56px;">
+        Every day we explain procedures to colleagues — <em>"go to this site, click there, copy that, send it there."</em> It's natural language, not code. Until now, turning that into automation meant developers, scripts, and constant maintenance. <span style="color:var(--text);font-weight:600;">Tasks.AI removes the translator.</span> You don't script it, diagram it, or prompt-engineer it. You show it — the way you'd train a new teammate — and it learns.
+      </p>
+      <blockquote data-reveal style="margin:0;font-family:var(--disp);font-weight:500;font-size:clamp(24px,3.2vw,40px);line-height:1.28;letter-spacing:-0.018em;max-width:900px;border-left:3px solid transparent;border-image:var(--grad) 1;padding-left:clamp(22px,3vw,38px);">
+        We all know how to explain how we do something. Why can't machines learn the way we teach a colleague? <span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;">Now they can.</span>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- 5. HOW IT WORKS -->
+  <section id="how" style="position:relative;background:var(--bg);padding:clamp(80px,11vw,150px) clamp(20px,5vw,56px);scroll-margin-top:80px;">
+    <div style="max-width:1160px;margin:0 auto;">
+      <div data-reveal style="font-family:var(--mono);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--faint);margin-bottom:18px;">How it works</div>
+      <h2 data-reveal style="font-family:var(--disp);font-weight:600;font-size:clamp(30px,4.4vw,52px);line-height:1.08;letter-spacing:-0.022em;margin:0 0 50px;">Show it once. It works forever.</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;">
+        <sc-for list="{{ howSteps }}" as="h" hint-placeholder-count="3">
+          <div data-reveal style="position:relative;border:1px solid var(--hairline);border-radius:20px;background:linear-gradient(180deg,var(--surface),rgba(12,12,22,0.6));padding:30px 26px 28px;overflow:hidden;transition:border-color .25s,transform .25s;" onMouseEnter="{{ cardOn }}" onMouseLeave="{{ cardOff }}">
+            <div style="position:absolute;top:0;left:26px;right:26px;height:1px;background:var(--grad);opacity:0.5;"></div>
+            <div style="font-family:var(--disp);font-weight:700;font-size:15px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:18px;letter-spacing:0.04em;">0{{ h.n }}</div>
+            <div style="font-family:var(--disp);font-weight:600;font-size:21px;margin-bottom:11px;">{{ h.title }}</div>
+            <div style="font-size:14.5px;line-height:1.6;color:var(--dim);">{{ h.body }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div data-reveal style="margin-top:22px;border-radius:20px;padding:1px;background:var(--grad);">
+        <div style="border-radius:19px;background:var(--bg-deep);padding:28px clamp(24px,4vw,40px);display:flex;flex-wrap:wrap;align-items:center;gap:18px 40px;">
+          <div style="flex:1 1 420px;font-size:clamp(17px,1.6vw,21px);line-height:1.5;font-family:var(--disp);font-weight:500;">
+            Learn a task once — <span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;">about a dollar, about 90 seconds.</span> Replay it for free, for life.
+          </div>
+          <div style="flex:0 0 auto;font-size:14.5px;color:var(--dim);max-width:320px;line-height:1.55;">Run it a thousand times a day; it still costs nothing, because it runs locally on your machine.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. PROOF -->
+  <section id="proof" style="position:relative;background:var(--bg-deep);padding:clamp(80px,11vw,150px) clamp(20px,5vw,56px);scroll-margin-top:74px;">
+    <div style="max-width:1160px;margin:0 auto;">
+      <div data-reveal style="font-family:var(--mono);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--faint);margin-bottom:18px;">Proof</div>
+      <h2 data-reveal style="font-family:var(--disp);font-weight:600;font-size:clamp(30px,4.4vw,52px);line-height:1.08;letter-spacing:-0.022em;margin:0 0 50px;">Not a concept. A working system.</h2>
+      <div data-reveal style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--hairline);border:1px solid var(--hairline);border-radius:20px;overflow:hidden;margin-bottom:46px;">
+        <sc-for list="{{ stats }}" as="st" hint-placeholder-count="4">
+          <div style="background:var(--surface);padding:30px 24px;">
+            <div style="font-family:var(--disp);font-weight:700;font-size:clamp(34px,4.4vw,52px);line-height:1;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:10px;letter-spacing:-0.02em;">{{ st.num }}</div>
+            <div style="font-size:13.5px;line-height:1.5;color:var(--dim);">{{ st.label }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div data-reveal style="margin-bottom:46px;">
+        <div style="font-size:12.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--faint);margin-bottom:16px;">Real sites it already handles</div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;">
+          <sc-for list="{{ sites }}" as="site" hint-placeholder-count="8">
+            <span style="font-size:14px;color:var(--dim);font-weight:500;padding:8px 15px;border:1px solid var(--hairline);border-radius:10px;background:var(--surface-2);">{{ site }}</span>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;">
+        <sc-for list="{{ capabilities }}" as="c" hint-placeholder-count="3">
+          <div data-reveal style="border:1px solid var(--hairline);border-radius:18px;background:var(--surface-2);padding:26px 24px;transition:border-color .25s;" onMouseEnter="{{ cardOn }}" onMouseLeave="{{ cardOff }}">
+            <div style="font-family:var(--disp);font-weight:600;font-size:18px;margin-bottom:10px;">{{ c.title }}</div>
+            <div style="font-size:14.5px;line-height:1.58;color:var(--dim);">{{ c.body }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. DIGITAL COWORKERS -->
+  <section id="coworkers" style="position:relative;background:var(--bg);padding:clamp(80px,11vw,150px) clamp(20px,5vw,56px);scroll-margin-top:74px;">
+    <div style="max-width:1160px;margin:0 auto;">
+      <div data-reveal style="font-family:var(--mono);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--faint);margin-bottom:18px;">A new workforce</div>
+      <h2 data-reveal style="font-family:var(--disp);font-weight:600;font-size:clamp(30px,4.4vw,52px);line-height:1.08;letter-spacing:-0.022em;margin:0 0 22px;">Meet your digital coworkers.</h2>
+      <p data-reveal style="font-size:clamp(16px,1.35vw,18px);line-height:1.62;color:var(--dim);max-width:760px;margin:0 0 48px;">
+        A digital coworker doesn't replace you — it works <em>with</em> you. You bring judgment, creativity, relationships, the exceptions. It handles the repetitive, the 24/7, the perfectly-consistent. You review and approve; it executes and reports back.
+      </p>
+      <div data-reveal style="border:1px solid var(--hairline);border-radius:20px;overflow:hidden;background:var(--surface);margin-bottom:34px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;background:var(--bg-deep);">
+          <div style="padding:18px 24px;font-family:var(--mono);font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--faint);border-right:1px solid var(--hairline);">You do…</div>
+          <div style="padding:18px 24px;font-family:var(--mono);font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#9fb6ff;">Your digital coworker does…</div>
+        </div>
+        <sc-for list="{{ coworkerRows }}" as="r" hint-placeholder-count="3">
+          <div style="display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--hairline);">
+            <div style="padding:18px 24px;font-size:15px;color:var(--text);border-right:1px solid var(--hairline);font-style:italic;">"{{ r.you }}"</div>
+            <div style="padding:18px 24px;font-size:15px;color:var(--dim);line-height:1.5;">{{ r.it }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div data-reveal style="border:1px solid var(--hairline);border-radius:18px;background:var(--surface-2);padding:28px clamp(24px,4vw,36px);">
+        <div style="font-family:var(--mono);font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--faint);margin-bottom:14px;">The model</div>
+        <p style="margin:0;font-size:clamp(15px,1.35vw,17px);line-height:1.62;color:var(--dim);">
+          Inspired by Kahneman's <em>Thinking, Fast and Slow</em>. <span style="color:var(--text);font-weight:600;">Skills are System 1</span> — fast, atomic, reusable (read an inbox, fill a form). <span style="color:var(--text);font-weight:600;">Tasks are System 2</span> — deliberate, multi-step (reconcile three ERPs, prepare a board pack). Complex work gets done by <span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:600;">composing simple, proven skills.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. TRUST -->
+  <section id="trust" style="position:relative;background:var(--bg-deep);padding:clamp(80px,11vw,150px) clamp(20px,5vw,56px);scroll-margin-top:80px;">
+    <div style="max-width:1160px;margin:0 auto;">
+      <div data-reveal style="font-family:var(--mono);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--faint);margin-bottom:18px;">Built on trust, not hope</div>
+      <h2 data-reveal style="font-family:var(--disp);font-weight:600;font-size:clamp(30px,4.4vw,52px);line-height:1.08;letter-spacing:-0.022em;margin:0 0 22px;max-width:840px;">The machine does exactly what you taught it.</h2>
+      <p data-reveal style="font-size:clamp(16px,1.35vw,18px);line-height:1.62;color:var(--dim);max-width:760px;margin:0 0 50px;">
+        Most AI agents start with a model and <em>hope</em> it does what you meant — a black box you can't see or repeat. Tasks.AI starts with <span style="color:var(--text);font-weight:600;">trust</span>: you taught it, so it's your procedure; you can watch every step; it's checked; it's the same every time.
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px;align-items:start;">
+        <div data-reveal style="display:flex;flex-direction:column;gap:14px;">
+          <sc-for list="{{ trustEq }}" as="t" hint-placeholder-count="6">
+            <div style="display:flex;align-items:flex-start;gap:14px;">
+              <span style="flex:none;width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:var(--grad);color:#fff;font-size:14px;font-weight:700;box-shadow:0 4px 14px rgba(104,123,250,0.35);">✓</span>
+              <div style="font-size:15.5px;line-height:1.5;padding-top:2px;"><span style="color:var(--text);font-weight:600;">{{ t.k }}</span> <span style="color:var(--dim);">— {{ t.v }}</span></div>
+            </div>
+          </sc-for>
+        </div>
+        <div data-reveal style="display:flex;flex-wrap:wrap;gap:11px;align-content:flex-start;">
+          <sc-for list="{{ pillars }}" as="p" hint-placeholder-count="6">
+            <span style="font-size:14.5px;color:var(--text);font-weight:500;padding:11px 18px;border:1px solid var(--hairline);border-radius:12px;background:var(--surface);">{{ p }}</span>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. KNOW-HOW -->
+  <section id="knowhow" style="position:relative;background:var(--bg);padding:clamp(80px,11vw,150px) clamp(20px,5vw,56px);scroll-margin-top:80px;overflow:hidden;">
+    <div aria-hidden="true" style="position:absolute;top:-10%;left:50%;transform:translateX(-50%);width:70vw;height:40vw;max-width:1000px;background:radial-gradient(circle,rgba(56,198,244,0.07),transparent 60%);pointer-events:none;"></div>
+    <div style="position:relative;max-width:1000px;margin:0 auto;text-align:center;">
+      <div data-reveal style="font-family:var(--mono);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--faint);margin-bottom:24px;">Your know-how is the asset</div>
+      <h2 data-reveal style="font-family:var(--disp);font-weight:600;font-size:clamp(28px,3.9vw,48px);line-height:1.14;letter-spacing:-0.022em;margin:0 0 26px;">A company's real value isn't its software. It's <span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;">what its people know how to do.</span></h2>
+      <p data-reveal style="font-size:clamp(16px,1.4vw,18px);line-height:1.65;color:var(--dim);max-width:740px;margin:0 auto 56px;">
+        That know-how lives in people's heads. It walks out the door when they leave. It's hard to pass on, harder to scale — and in an age of cloud AI, easy to leak. We built Tasks.AI to help you <span style="color:var(--text);font-weight:600;">keep it.</span> Every procedure your team teaches becomes a skill you own — captured, documented, and ready to run.
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;text-align:left;">
+        <sc-for list="{{ knowHow }}" as="k" hint-placeholder-count="3">
+          <div data-reveal style="border-top:2px solid transparent;border-image:var(--grad) 1;padding:22px 4px 0;">
+            <div style="font-family:var(--disp);font-weight:600;font-size:17px;margin-bottom:10px;">{{ k.title }}</div>
+            <div style="font-size:14.5px;line-height:1.58;color:var(--dim);">{{ k.body }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. WHO IT'S FOR -->
+  <section id="usecases" style="position:relative;background:var(--bg-deep);padding:clamp(80px,11vw,150px) clamp(20px,5vw,56px);scroll-margin-top:74px;">
+    <div style="max-width:1160px;margin:0 auto;">
+      <div data-reveal style="font-family:var(--mono);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--faint);margin-bottom:18px;">Who it's for</div>
+      <h2 data-reveal style="font-family:var(--disp);font-weight:600;font-size:clamp(30px,4.4vw,52px);line-height:1.08;letter-spacing:-0.022em;margin:0 0 50px;max-width:820px;">Built for the work that runs the business.</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;">
+        <sc-for list="{{ roles }}" as="r" hint-placeholder-count="3">
+          <div data-reveal style="border:1px solid var(--hairline);border-radius:18px;background:var(--surface);padding:26px 24px;display:flex;flex-direction:column;gap:14px;transition:border-color .25s;" onMouseEnter="{{ cardOn }}" onMouseLeave="{{ cardOff }}">
+            <div style="font-family:var(--disp);font-weight:600;font-size:17px;">{{ r.role }}</div>
+            <div style="font-size:14px;line-height:1.55;color:var(--dim);flex:1;">{{ r.example }}</div>
+            <sc-if value="{{ r.saved }}" hint-placeholder-val="{{ true }}">
+              <div style="display:inline-flex;align-items:center;gap:10px;font-family:var(--disp);font-weight:600;font-size:16px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;">{{ r.saved }}</div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+      <p data-reveal style="margin:42px 0 0;text-align:center;font-family:var(--disp);font-weight:500;font-size:clamp(18px,2vw,24px);color:var(--text);letter-spacing:-0.015em;">If a person can do it in a browser, you can teach it to Tasks.AI.</p>
+    </div>
+  </section>
+
+  <!-- 11. MARKETPLACE -->
+  <section id="marketplace" style="position:relative;background:var(--bg);padding:clamp(80px,11vw,150px) clamp(20px,5vw,56px);scroll-margin-top:74px;">
+    <div style="max-width:980px;margin:0 auto;">
+      <div data-reveal style="font-family:var(--mono);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--faint);margin-bottom:18px;">Marketplace</div>
+      <h2 data-reveal style="font-family:var(--disp);font-weight:600;font-size:clamp(30px,4.4vw,52px);line-height:1.08;letter-spacing:-0.022em;margin:0 0 16px;display:flex;flex-wrap:wrap;align-items:baseline;gap:14px;">An App Store for work. <span style="font-family:var(--body);font-weight:600;font-size:14px;letter-spacing:0;text-transform:uppercase;color:#9fb6ff;border:1px solid rgba(159,182,255,0.35);background:rgba(104,123,250,0.1);padding:5px 12px;border-radius:999px;align-self:center;">coming</span></h2>
+      <p data-reveal style="font-size:clamp(16px,1.35vw,18px);line-height:1.62;color:var(--dim);max-width:680px;margin:0 0 40px;">
+        The skill you teach today is an asset. Soon, the best skills travel — share them across your company, or publish them to a marketplace where expertise gets paid for, by the run.
+      </p>
+      <div data-reveal style="border:1px solid var(--hairline);border-radius:20px;overflow:hidden;background:var(--surface);">
+        <sc-for list="{{ market }}" as="m" hint-placeholder-count="3">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:20px 24px;border-top:1px solid var(--hairline);">
+            <span style="font-family:var(--mono);font-size:14px;color:#cfd2ff;background:rgba(123,108,255,0.1);border:1px solid rgba(123,108,255,0.2);padding:6px 12px;border-radius:9px;">{{ m.skill }}</span>
+            <span style="font-size:14px;color:var(--faint);flex:1;min-width:120px;">{{ m.by }}</span>
+            <span style="font-family:var(--disp);font-weight:600;font-size:15px;color:var(--text);">{{ m.price }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <p data-reveal style="margin:26px 0 0;font-size:15px;color:var(--faint);text-align:center;">Creators turn expertise into income. Companies adopt proven solutions. Everyone's know-how compounds.</p>
+    </div>
+  </section>
+
+  <!-- 12. DIFFERENT -->
+  <section id="different" style="position:relative;background:var(--bg-deep);padding:clamp(80px,11vw,150px) clamp(20px,5vw,56px);scroll-margin-top:74px;">
+    <div style="max-width:1160px;margin:0 auto;">
+      <div data-reveal style="font-family:var(--mono);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--faint);margin-bottom:18px;">What makes us different</div>
+      <h2 data-reveal style="font-family:var(--disp);font-weight:600;font-size:clamp(26px,3.4vw,42px);line-height:1.15;letter-spacing:-0.02em;margin:0 0 50px;max-width:980px;">Some work is too messy for APIs, too changeable for RPA, too sensitive for the cloud. <span style="color:var(--dim);">That's the work we built this for.</span></h2>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <sc-for list="{{ compare }}" as="c" hint-placeholder-count="3">
+          <div data-reveal style="display:grid;grid-template-columns:minmax(140px,0.7fr) 1.15fr 1.25fr;gap:1px;background:var(--hairline);border:1px solid var(--hairline);border-radius:16px;overflow:hidden;">
+            <div style="background:var(--surface);padding:22px 20px;">
+              <div style="font-family:var(--disp);font-weight:600;font-size:16px;margin-bottom:4px;">{{ c.cat }}</div>
+              <div style="font-size:12.5px;color:var(--faint);">{{ c.sub }}</div>
+            </div>
+            <div style="background:var(--surface);padding:22px 20px;font-size:14px;line-height:1.55;color:var(--dim);">{{ c.usual }}</div>
+            <div style="background:linear-gradient(180deg,rgba(104,123,250,0.10),rgba(168,87,242,0.06));padding:22px 20px;font-size:14px;line-height:1.55;color:var(--text);border-left:1px solid rgba(123,108,255,0.25);">{{ c.ours }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <p data-reveal style="margin:40px auto 0;text-align:center;font-family:var(--disp);font-weight:500;font-size:clamp(18px,2vw,26px);line-height:1.4;letter-spacing:-0.015em;max-width:860px;">
+        Where others ask you to trust a model, we let you <span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;">trust a procedure</span> — one you taught, can see, and can repeat.
+      </p>
+    </div>
+  </section>
+
+  <!-- 13. AMBITION -->
+  <section id="vision" style="position:relative;background:var(--bg);padding:clamp(90px,13vw,180px) clamp(20px,5vw,56px);scroll-margin-top:74px;overflow:hidden;">
+    <div aria-hidden="true" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:80vw;height:80vw;max-width:1100px;max-height:1100px;background:radial-gradient(circle,rgba(104,123,250,0.14),transparent 60%);animation:drift 22s ease-in-out infinite;pointer-events:none;"></div>
+    <div style="position:relative;max-width:1000px;margin:0 auto;text-align:center;">
+      <img data-reveal src="assets/logo_mark_transparent.png" alt="" style="height:64px;width:auto;margin:0 auto 34px;display:block;filter:drop-shadow(0 12px 36px rgba(104,123,250,0.5));animation:floaty 8s ease-in-out infinite;" />
+      <div data-reveal style="font-family:var(--mono);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--faint);margin-bottom:24px;">The ambition</div>
+      <h2 data-reveal style="font-family:var(--disp);font-weight:600;font-size:clamp(30px,4.6vw,56px);line-height:1.08;letter-spacing:-0.024em;margin:0 0 28px;">We're building the operating system for digital coworkers.</h2>
+      <p data-reveal style="font-size:clamp(16px,1.45vw,19px);line-height:1.66;color:var(--dim);max-width:740px;margin:0 auto 44px;">
+        The expensive part of intelligence is learning. We pay it once, then run for free — so automation finally reaches <em>everyone's</em> work, not just the parts with an API. This is the augmentation of a billion knowledge workers. Today, the browser. Tomorrow, the physical world.
+      </p>
+      <blockquote data-reveal style="margin:0 auto;max-width:820px;font-family:var(--disp);font-weight:500;font-size:clamp(22px,3vw,36px);line-height:1.3;letter-spacing:-0.018em;">
+        We're not here to replace people. <span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;">We're here to give them superpowers</span> — and to help every company protect what it knows best.
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- MAIN-END -->
+  </main>
+
+  <!-- 14. FINAL CTA -->
+  <section style="position:relative;background:var(--bg-deep);padding:clamp(90px,13vw,170px) clamp(20px,5vw,56px);overflow:hidden;">
+    <div aria-hidden="true" style="position:absolute;top:-20%;left:50%;transform:translateX(-50%);width:90vw;height:70vw;max-width:1200px;max-height:760px;background:radial-gradient(circle,rgba(104,123,250,0.16),transparent 62%);animation:drift2 20s ease-in-out infinite;pointer-events:none;"></div>
+    <div style="position:relative;max-width:900px;margin:0 auto;text-align:center;">
+      <div data-reveal style="font-family:var(--mono);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--faint);margin-bottom:24px;">Early access</div>
+      <h2 data-reveal style="font-family:var(--disp);font-weight:600;font-size:clamp(34px,5.4vw,68px);line-height:1.04;letter-spacing:-0.025em;margin:0 0 26px;">Teach it once.<br><span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;">Let it work forever.</span></h2>
+      <p data-reveal style="font-size:clamp(16px,1.45vw,19px);line-height:1.65;color:var(--dim);max-width:600px;margin:0 auto 40px;">
+        We're onboarding a small group of early partners. Tell us the first job you'd hand off — we'll reach out personally.
+      </p>
+      <div data-reveal style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;">
+        <button onClick="{{ openModal }}" style="border:none;cursor:pointer;font-family:var(--body);font-weight:600;font-size:17px;color:#fff;background:var(--grad);padding:17px 34px;border-radius:16px;box-shadow:0 12px 40px rgba(104,123,250,0.4);display:inline-flex;align-items:center;gap:11px;transition:transform .18s ease,box-shadow .18s ease;" onMouseEnter="{{ btnOn }}" onMouseLeave="{{ btnOff }}">Get Early Access <span style="font-size:19px;">→</span></button>
+      </div>
+      <p data-reveal style="margin:22px 0 0;font-size:13.5px;color:var(--faint);">No credit card. No setup. Your data and know-how stay yours.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="position:relative;background:var(--bg);border-top:1px solid var(--hairline);padding:clamp(48px,6vw,70px) clamp(20px,5vw,56px) 40px;">
+    <div style="max-width:1160px;margin:0 auto;display:flex;flex-wrap:wrap;gap:32px 48px;align-items:flex-start;justify-content:space-between;">
+      <div style="flex:1 1 280px;max-width:380px;">
+        <a href="#top" style="display:flex;align-items:center;gap:11px;margin-bottom:16px;">
+          <img src="assets/logo_mark_transparent.png" alt="TasksAI" style="height:28px;width:auto;display:block;" />
+          <span style="font-family:var(--disp);font-weight:600;font-size:19px;letter-spacing:-0.01em;">TasksAI</span>
+        </a>
+        <p style="font-size:14px;line-height:1.6;color:var(--faint);margin:0;">The operating system for digital coworkers. Teach once, automate forever — locally, privately, on your own accounts.</p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:40px 64px;">
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div style="font-family:var(--mono);font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--faint);margin-bottom:2px;">Product</div>
+          <a href="#how" style="font-size:14px;color:var(--dim);transition:color .15s;" onMouseEnter="{{ linkOn }}" onMouseLeave="{{ linkOff }}">How it works</a>
+          <a href="#trust" style="font-size:14px;color:var(--dim);transition:color .15s;" onMouseEnter="{{ linkOn }}" onMouseLeave="{{ linkOff }}">Why trust it</a>
+          <a href="#vision" style="font-size:14px;color:var(--dim);transition:color .15s;" onMouseEnter="{{ linkOn }}" onMouseLeave="{{ linkOff }}">Vision</a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div style="font-family:var(--mono);font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--faint);margin-bottom:2px;">Get started</div>
+          <a onClick="{{ openModal }}" style="font-size:14px;color:var(--dim);cursor:pointer;transition:color .15s;" onMouseEnter="{{ linkOn }}" onMouseLeave="{{ linkOff }}">Early access</a>
+          <a href="mailto:hello@tasks.ai" style="font-size:14px;color:var(--dim);transition:color .15s;" onMouseEnter="{{ linkOn }}" onMouseLeave="{{ linkOff }}">Contact us</a>
+        </div>
+      </div>
+    </div>
+    <div style="max-width:1160px;margin:36px auto 0;padding-top:24px;border-top:1px solid var(--hairline);display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;">
+      <span style="font-size:13px;color:var(--faint);">© 2026 Tasks.AI — All rights reserved.</span>
+      <span style="font-family:var(--mono);font-size:12px;color:var(--faint);">Made for the augmentation of a billion knowledge workers.</span>
+    </div>
+  </footer>
+
+  <!-- MODAL -->
+  <sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ onBackdrop }}" style="position:fixed;inset:0;z-index:120;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(6,6,14,0.72);backdrop-filter:blur(8px);animation:fadeIn .2s ease;">
+      <div onClick="{{ stop }}" role="dialog" aria-modal="true" aria-label="Get Early Access" style="position:relative;width:100%;max-width:512px;border:1px solid var(--hairline);border-radius:22px;background:linear-gradient(180deg,#14152270,#0c0c16f0),var(--surface);box-shadow:0 40px 120px rgba(0,0,0,0.6);overflow:hidden;max-height:92vh;overflow-y:auto;">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--grad);"></div>
+        <div aria-hidden="true" style="position:absolute;top:-80px;right:-60px;width:240px;height:240px;background:radial-gradient(circle,rgba(168,87,242,0.22),transparent 70%);filter:blur(8px);pointer-events:none;"></div>
+        <button onClick="{{ closeModal }}" aria-label="Close" style="position:absolute;top:16px;right:16px;z-index:2;width:34px;height:34px;border-radius:10px;border:1px solid var(--hairline);background:var(--surface-2);color:var(--dim);cursor:pointer;font-size:17px;line-height:1;display:flex;align-items:center;justify-content:center;transition:color .15s,border-color .15s;" onMouseEnter="{{ ghostOn }}" onMouseLeave="{{ ghostOff }}">✕</button>
+
+        <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
+          <div style="position:relative;padding:48px 36px 44px;text-align:center;">
+            <div style="width:64px;height:64px;border-radius:18px;margin:0 auto 22px;display:flex;align-items:center;justify-content:center;background:var(--grad);box-shadow:0 12px 36px rgba(104,123,250,0.4);font-size:30px;color:#fff;">✓</div>
+            <h3 style="font-family:var(--disp);font-weight:600;font-size:26px;margin:0 0 12px;">You're on the list.</h3>
+            <p style="color:var(--dim);font-size:15.5px;line-height:1.6;margin:0 0 28px;max-width:360px;margin-inline:auto;">Thanks{{ nameGreeting }} — we're onboarding a small group of early partners and we'll reach out personally. Keep an eye on your inbox.</p>
+            <button onClick="{{ closeModal }}" style="border:none;cursor:pointer;font-family:var(--body);font-weight:600;font-size:15px;color:#fff;background:var(--grad);padding:13px 26px;border-radius:14px;">Done</button>
+          </div>
+        </sc-if>
+        <sc-if value="{{ showForm }}" hint-placeholder-val="{{ true }}">
+          <div style="position:relative;padding:40px 36px 36px;">
+            <div style="display:flex;align-items:center;gap:11px;margin-bottom:8px;">
+              <img src="assets/logo_mark_transparent.png" alt="" style="height:26px;width:auto;" />
+              <span style="font-family:var(--mono);font-size:11.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--faint);">Early Access</span>
+            </div>
+            <h3 style="font-family:var(--disp);font-weight:600;font-size:25px;line-height:1.12;margin:0 0 7px;letter-spacing:-0.015em;">Be one of the first to put it to work.</h3>
+            <p style="color:var(--dim);font-size:14.5px;line-height:1.55;margin:0 0 24px;">Tell us the work you'd hand off first.</p>
+            <form onSubmit="{{ submit }}" style="display:flex;flex-direction:column;gap:14px;">
+              <div style="display:flex;flex-wrap:wrap;gap:14px;">
+                <label style="flex:1 1 180px;min-width:150px;display:flex;flex-direction:column;gap:7px;">
+                  <span style="font-size:12.5px;color:var(--faint);font-weight:600;letter-spacing:0.01em;">Company</span>
+                  <input value="{{ fCompany }}" onInput="{{ setCompany }}" placeholder="Acme Inc." style="font-family:var(--body);font-size:15px;color:var(--text);background:var(--bg-deep);border:1px solid var(--hairline);border-radius:12px;padding:12px 14px;outline:none;transition:border-color .15s,box-shadow .15s;" onFocus="{{ inOn }}" onBlur="{{ inOff }}" />
+                </label>
+                <label style="flex:1 1 180px;min-width:150px;display:flex;flex-direction:column;gap:7px;">
+                  <span style="font-size:12.5px;color:var(--faint);font-weight:600;letter-spacing:0.01em;">Name</span>
+                  <input value="{{ fName }}" onInput="{{ setName }}" placeholder="Jane Doe" style="font-family:var(--body);font-size:15px;color:var(--text);background:var(--bg-deep);border:1px solid var(--hairline);border-radius:12px;padding:12px 14px;outline:none;transition:border-color .15s,box-shadow .15s;" onFocus="{{ inOn }}" onBlur="{{ inOff }}" />
+                </label>
+              </div>
+              <label style="display:flex;flex-direction:column;gap:7px;">
+                <span style="font-size:12.5px;color:var(--faint);font-weight:600;letter-spacing:0.01em;">Work email</span>
+                <input type="email" required value="{{ fEmail }}" onInput="{{ setEmail }}" placeholder="jane@acme.com" style="font-family:var(--body);font-size:15px;color:var(--text);background:var(--bg-deep);border:1px solid var(--hairline);border-radius:12px;padding:12px 14px;outline:none;transition:border-color .15s,box-shadow .15s;" onFocus="{{ inOn }}" onBlur="{{ inOff }}" />
+              </label>
+              <label style="display:flex;flex-direction:column;gap:7px;">
+                <span style="font-size:12.5px;color:var(--faint);font-weight:600;letter-spacing:0.01em;">What would you teach it first?</span>
+                <textarea value="{{ fTeach }}" onInput="{{ setTeach }}" rows="3" placeholder="e.g. reconcile our SAP + NetSuite exports against the bank every morning" style="font-family:var(--body);font-size:15px;color:var(--text);background:var(--bg-deep);border:1px solid var(--hairline);border-radius:12px;padding:12px 14px;outline:none;resize:vertical;min-height:70px;transition:border-color .15s,box-shadow .15s;" onFocus="{{ inOn }}" onBlur="{{ inOff }}"></textarea>
+              </label>
+              <button type="submit" disabled="{{ sending }}" style="margin-top:4px;border:none;cursor:pointer;font-family:var(--body);font-weight:600;font-size:16px;color:#fff;background:var(--grad);padding:15px;border-radius:14px;box-shadow:0 10px 30px rgba(104,123,250,0.32);display:flex;align-items:center;justify-content:center;gap:10px;opacity:{{ submitOpacity }};transition:opacity .15s;">{{ submitLabel }}</button>
+              <p style="text-align:center;font-size:12.5px;color:var(--faint);margin:4px 0 0;">No credit card. No setup. We'll reach out personally.</p>
+            </form>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  FORM_ENDPOINT = "";
+  state = {
+    modalOpen:false, submitted:false, sending:false,
+    company:'', name:'', email:'', teach:'',
+    megaOpen:false, mobileOpen:false
+  };
+
+  componentDidMount(){
+    this._reduced = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    this._setupReveal();
+    this._setupNav();
+    this._setupDemo();
+    this._onKey = (e)=>{ if(e.key==='Escape'){ if(this.state.modalOpen) this.closeModal(); if(this.state.megaOpen) this.megaOff(); if(this.state.mobileOpen) this.mobileClose(); } };
+    window.addEventListener('keydown', this._onKey);
+  }
+  componentWillUnmount(){
+    window.removeEventListener('keydown', this._onKey);
+    if(this._io) this._io.disconnect();
+    if(this._navScroll) window.removeEventListener('scroll', this._navScroll);
+    if(this._demoTimer) clearInterval(this._demoTimer);
+  }
+  componentDidUpdate(_, prev){
+    // re-scan reveal targets after sections stream/append
+    if(!this._reduced) this._setupReveal();
+    document.body.style.overflow = this.state.mobileOpen ? 'hidden' : '';
+  }
+
+  _setupReveal(){
+    const els = Array.from(document.querySelectorAll('[data-reveal]'));
+    if(this._reduced){ els.forEach(el=>{el.style.opacity=1;el.style.transform='none';}); return; }
+    let added=false;
+    els.forEach((el)=>{
+      if(el.__rev) return; el.__rev=true; added=true;
+      el.style.opacity=0;
+      el.style.transform='translateY(16px)';
+      el.style.transition='opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1)';
+    });
+    this._revealCheck();
+    if(!this._revealScroll){
+      this._revealScroll = ()=> this._revealCheck();
+      window.addEventListener('scroll', this._revealScroll, {passive:true});
+      window.addEventListener('resize', this._revealScroll, {passive:true});
+    }
+    // safety: ensure everything visible shortly after mount even if events stall
+    if(added){ requestAnimationFrame(()=>this._revealCheck()); setTimeout(()=>this._revealCheck(), 120); }
+  }
+  _revealCheck(){
+    const h = window.innerHeight || document.documentElement.clientHeight;
+    document.querySelectorAll('[data-reveal]').forEach(el=>{
+      if(el.__shown) return;
+      const r = el.getBoundingClientRect();
+      if(r.top < h*0.92 && r.bottom > 0){
+        el.__shown=true; el.style.opacity=1; el.style.transform='none';
+        // hard-commit visibility in case transitions are frozen (backgrounded iframe)
+        setTimeout(()=>{ el.style.transition='none'; el.style.opacity=1; el.style.transform='none'; }, 850);
+      }
+    });
+  }
+
+  _setupNav(){
+    const nav = this.refs && this.refs.navRef;
+    if(!nav) return;
+    this._navScroll = ()=>{
+      nav.style.boxShadow = window.scrollY>24 ? '0 10px 30px rgba(0,0,0,0.35)' : 'none';
+    };
+    window.addEventListener('scroll', this._navScroll, {passive:true});
+    this._navScroll();
+  }
+
+  _setupDemo(){
+    if(this._reduced) return;
+    const root = this.refs && this.refs.stepsRef;
+    if(!root) return;
+    const cards = Array.from(root.querySelectorAll('[data-step]'));
+    if(!cards.length) return;
+    let active = 0;
+    const apply = ()=>{
+      cards.forEach((c,i)=>{
+        const on = i===active;
+        c.style.borderColor = on ? 'rgba(123,108,255,0.55)' : 'var(--hairline)';
+        c.style.background = on ? 'rgba(123,108,255,0.10)' : 'var(--surface-2)';
+        c.style.boxShadow = on ? '0 0 0 1px rgba(123,108,255,0.25), 0 8px 30px rgba(104,123,250,0.18)' : 'none';
+        const num = c.querySelector('[data-num]');
+        if(num){ num.style.background = on?'var(--grad)':'rgba(123,108,255,0.14)'; num.style.color = on?'#fff':'#cfd2ff'; num.style.borderColor= on?'transparent':'rgba(123,108,255,0.25)'; }
+      });
+    };
+    apply();
+    this._demoTimer = setInterval(()=>{ active=(active+1)%cards.length; apply(); }, 2200);
+  }
+
+  megaOn = ()=> this.setState({megaOpen:true});
+  megaOff = ()=> this.setState({megaOpen:false});
+  megaToggle = ()=> this.setState(s=>({megaOpen:!s.megaOpen}));
+  mobileToggle = ()=> this.setState(s=>({mobileOpen:!s.mobileOpen}));
+  mobileClose = ()=> this.setState({mobileOpen:false});
+  openModalFromMobile = ()=> this.setState({mobileOpen:false, modalOpen:true});
+  megaItemOn = e=>{ e.currentTarget.style.background='rgba(255,255,255,0.055)'; };
+  megaItemOff = e=>{ e.currentTarget.style.background='transparent'; };
+
+  openModal = ()=> this.setState({modalOpen:true});
+  closeModal = ()=> this.setState({modalOpen:false, submitted:false});
+  onBackdrop = ()=> this.closeModal();
+  stop = (e)=> e.stopPropagation();
+
+  setCompany = e=> this.setState({company:e.target.value});
+  setName = e=> this.setState({name:e.target.value});
+  setEmail = e=> this.setState({email:e.target.value});
+  setTeach = e=> this.setState({teach:e.target.value});
+
+  submit = (e)=>{
+    e.preventDefault();
+    if(this.state.sending) return;
+    this.setState({sending:true});
+    const lead = {company:this.state.company,name:this.state.name,email:this.state.email,teach:this.state.teach,source:'tasks.ai',ts:Date.now()};
+    try{
+      const leads = JSON.parse(localStorage.getItem('tasksai_leads')||'[]');
+      leads.push(lead); localStorage.setItem('tasksai_leads', JSON.stringify(leads));
+    }catch(err){}
+    const done = ()=> this.setState({sending:false, submitted:true});
+    const ep = this.FORM_ENDPOINT;
+    if(ep){
+      fetch(ep,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(lead)})
+        .then(()=>setTimeout(done,300)).catch(()=>setTimeout(done,300));
+    } else {
+      setTimeout(done, 850);
+    }
+  };
+
+  // hover helpers
+  linkOn = e=> e.currentTarget.style.color='var(--text)';
+  linkOff = e=> e.currentTarget.style.color='var(--dim)';
+  btnOn = e=>{ e.currentTarget.style.transform='translateY(-2px)'; e.currentTarget.style.boxShadow='0 14px 40px rgba(104,123,250,0.5)'; };
+  btnOff = e=>{ e.currentTarget.style.transform='none'; e.currentTarget.style.boxShadow='0 6px 22px rgba(104,123,250,0.28)'; };
+  ghostOn = e=>{ e.currentTarget.style.borderColor='rgba(255,255,255,0.22)'; e.currentTarget.style.background='rgba(255,255,255,0.06)'; e.currentTarget.style.color='var(--text)'; };
+  ghostOff = e=>{ e.currentTarget.style.borderColor='var(--hairline)'; e.currentTarget.style.background='var(--surface-2)'; e.currentTarget.style.color=''; };
+  inOn = e=>{ e.currentTarget.style.borderColor='rgba(123,108,255,0.6)'; e.currentTarget.style.boxShadow='0 0 0 3px rgba(123,108,255,0.16)'; };
+  inOff = e=>{ e.currentTarget.style.borderColor='var(--hairline)'; e.currentTarget.style.boxShadow='none'; };
+  cardOn = e=>{ e.currentTarget.style.borderColor='rgba(123,108,255,0.45)'; e.currentTarget.style.background='rgba(123,108,255,0.06)'; };
+  cardOff = e=>{ e.currentTarget.style.borderColor='var(--hairline)'; e.currentTarget.style.background=''; };
+
+  renderVals(){
+    const s=this.state;
+    return {
+      navRef:'navRef', mainRef:'mainRef', stepsRef:'stepsRef',
+      openModal:this.openModal, closeModal:this.closeModal, onBackdrop:this.onBackdrop, stop:this.stop,
+      submit:this.submit,
+      setCompany:this.setCompany, setName:this.setName, setEmail:this.setEmail, setTeach:this.setTeach,
+      fCompany:s.company, fName:s.name, fEmail:s.email, fTeach:s.teach,
+      modalOpen:s.modalOpen, submitted:s.submitted, showForm:!s.submitted, sending:s.sending,
+      submitLabel: s.sending ? 'Sending…' : 'Get Early Access',
+      submitOpacity: s.sending ? 0.7 : 1,
+      nameGreeting: s.name ? (', '+s.name.trim().split(' ')[0]) : '',
+      linkOn:this.linkOn, linkOff:this.linkOff, btnOn:this.btnOn, btnOff:this.btnOff,
+      ghostOn:this.ghostOn, ghostOff:this.ghostOff, inOn:this.inOn, inOff:this.inOff,
+      cardOn:this.cardOn, cardOff:this.cardOff,
+      megaOpen:s.megaOpen, mobileOpen:s.mobileOpen,
+      megaOn:this.megaOn, megaOff:this.megaOff, megaToggle:this.megaToggle,
+      mobileToggle:this.mobileToggle, mobileClose:this.mobileClose, openModalFromMobile:this.openModalFromMobile,
+      megaItemOn:this.megaItemOn, megaItemOff:this.megaItemOff,
+      megaGroups:[
+        {title:'Why it exists', items:[
+          {label:'The problem', href:'#problem', desc:'Why the work can\u2019t get automated'},
+          {label:'The idea', href:'#idea', desc:'Teaching, not coding'},
+          {label:'The ambition', href:'#vision', desc:'An OS for digital coworkers'}
+        ]},
+        {title:'How it works', items:[
+          {label:'How it works', href:'#how', desc:'Show it once, it runs forever'},
+          {label:'Proof', href:'#proof', desc:'A working system, today'},
+          {label:'Digital coworkers', href:'#coworkers', desc:'They work with you, not instead of you'},
+          {label:'Why trust it', href:'#trust', desc:'Auditable, repeatable, local'},
+          {label:'What makes us different', href:'#different', desc:'Beyond APIs, RPA and cloud agents'}
+        ]},
+        {title:'For your team', items:[
+          {label:'Use cases', href:'#usecases', desc:'Built for the work that runs the business'},
+          {label:'Your know-how', href:'#knowhow', desc:'The asset you capture and keep'},
+          {label:'Marketplace', href:'#marketplace', desc:'An App Store for work'}
+        ]}
+      ],
+      trustChips:["Teach, don't code","Runs on your machine","100% auditable","You own it"],
+      problemTiles:[
+        {icon:'⏳',title:'30% of the day, repeated',body:'A billion knowledge workers lose nearly a third of every day to the same browser chores — pulling reports, copying data, reconciling rows.'},
+        {icon:'🧠',title:'They know how — they can\u2019t code it',body:'The people closest to the work understand it perfectly. They just don\u2019t write scripts, and they shouldn\u2019t have to.'},
+        {icon:'🔒',title:'Cloud agents want your keys',body:'Most AI agents ask you to hand over passwords and ship your data — and your know-how — outside your walls.'}
+      ],
+      howSteps:[
+        {n:1,title:'Show it once',body:'Record yourself doing the task in your real browser, narrating in plain language — exactly how you\u2019d train a new teammate.'},
+        {n:2,title:'It learns the goal',body:'Tasks.AI turns your demonstration into a verified, reusable skill — not a brittle macro, but an understanding of what you meant.'},
+        {n:3,title:'It runs forever',body:'Ask in everyday words. It executes locally, on your accounts, as many times as you like — at no extra cost.'}
+      ],
+      stats:[
+        {num:'~$1',label:'Average cost to teach one new skill'},
+        {num:'~90s',label:'Time to learn a typical task'},
+        {num:'$0',label:'Cost per run, every run after'},
+        {num:'100%',label:'Steps visible and auditable'}
+      ],
+      sites:['SAP','NetSuite','Salesforce','Workday','QuickBooks','Gmail','Excel Online','SharePoint','Concur','Jira','HubSpot','any internal portal'],
+      capabilities:[
+        {title:'Lives where you work',body:'Runs in your own browser session, on your own logins. No API to build, no password to surrender.'},
+        {title:'Handles the messy middle',body:'Reads screens, fills forms, moves data between systems that were never meant to talk to each other.'},
+        {title:'Adapts, doesn\u2019t shatter',body:'When a layout shifts, it works from the goal you taught — not a hard-coded pixel that breaks overnight.'}
+      ],
+      coworkerRows:[
+        {you:'Every morning, pull the overnight orders and check them against stock.',it:'Logs in, exports both reports, flags mismatches, and drops a summary in your inbox by 8am.'},
+        {you:'When an invoice arrives, match it to the PO and enter it.',it:'Reads the invoice, finds the PO, keys it into the ERP, and parks the exceptions for you to review.'},
+        {you:'Each Friday, prep the numbers for the board pack.',it:'Gathers figures from three systems, builds the table, and hands you a draft to approve.'}
+      ],
+      trustEq:[
+        {k:'You taught it',v:'so it follows your procedure, not a guess'},
+        {k:'You can watch it',v:'every click and step is visible, live'},
+        {k:'It\u2019s checked',v:'results are verified against what you showed'},
+        {k:'It\u2019s repeatable',v:'the same input gives the same output, every time'},
+        {k:'It stays local',v:'runs on your machine, on your accounts'},
+        {k:'You own it',v:'the skill is yours to keep, edit, and share'}
+      ],
+      pillars:['Transparent','Auditable','Deterministic','Private','Local-first','Yours to own'],
+      knowHow:[
+        {title:'Capture it',body:'Every task your team teaches becomes a documented, runnable skill — not tribal knowledge trapped in someone\u2019s head.'},
+        {title:'Protect it',body:'It runs inside your walls, on your accounts. Your procedures and data never leave to train someone else\u2019s model.'},
+        {title:'Grow it',body:'Skills compound. Share them across the company, refine them, and build bigger capabilities from proven parts.'}
+      ],
+      roles:[
+        {role:'Finance & Accounting',example:'Reconcile ERP exports against the bank, match invoices to POs, chase the exceptions.',saved:'Hours back every morning'},
+        {role:'Operations',example:'Move orders between portals, update trackers, keep two systems that don\u2019t talk in sync.',saved:'No more copy-paste days'},
+        {role:'Sales & RevOps',example:'Enrich leads, keep the CRM clean, build the weekly pipeline report without lifting a finger.',saved:'A tidy CRM, on autopilot'},
+        {role:'HR & People',example:'Onboard new hires across systems, pull compliance reports, file the paperwork.',saved:'Consistent, every time'},
+        {role:'Support',example:'Triage the inbox, look up accounts, draft replies grounded in your real data.',saved:'Faster first responses'},
+        {role:'Anyone with a browser tab',example:'If you can show it, you can teach it — no developer, no ticket, no waiting.',saved:'Automation, finally yours'}
+      ],
+      market:[
+        {skill:'invoice-reconcile.skill',by:'by a finance team',price:'$0.04 / run'},
+        {skill:'lead-enrich.skill',by:'by a RevOps lead',price:'$0.02 / run'},
+        {skill:'board-pack-prep.skill',by:'by an operations guild',price:'$0.09 / run'}
+      ],
+      compare:[
+        {cat:'APIs',sub:'integrations',usual:'Need a developer, only cover systems that expose one, break when endpoints change.',ours:'Works on any site a person can use — no API required, taught by demonstration.'},
+        {cat:'RPA',sub:'macros',usual:'Brittle, pixel-bound scripts that shatter the moment a layout shifts.',ours:'Learns the goal, adapts to change, and stays readable and editable by you.'},
+        {cat:'Cloud agents',sub:'black boxes',usual:'Want your passwords, send your data out, and you can\u2019t see or repeat what they did.',ours:'Runs locally on your accounts; every step is visible, auditable, and yours.'}
+      ],
+      demoSteps:[
+        {i:0,n:'1',title:'Teach',desc:'Hit record and do the task once, talking it through.'},
+        {i:1,n:'2',title:'Train',desc:'It learns the goal — a reusable, verified skill.'},
+        {i:2,n:'3',title:'Run',desc:'Ask in plain language. It runs in your browser, forever.'}
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
+

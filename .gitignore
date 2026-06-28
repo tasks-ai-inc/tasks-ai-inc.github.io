@@ -1,0 +1,25 @@
+# macOS junk
+.DS_Store
+._*
+
+# Local dot-directories — NOT published to the public repo.
+# .claude = local Claude Code tooling (the sync-tasksai skill, settings)
+# .works = local working docs (changelogs, notes)
+# .data  = any local lead/contact exports (keep PII out of a public repo)
+.claude/
+.works/
+.data/
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Claude Design export archives / source (sync source, not deployed)
+*.dc.html
+*.zip
+
+# Apps Script backend template — kept local, not published
+google-apps-script.gs
+
+# NOTE: .nojekyll is REQUIRED by GitHub Pages — it stays tracked (not ignored).

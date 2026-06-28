@@ -1,0 +1,22 @@
+# robots.txt — Tasks.AI
+
+User-agent: *
+Allow: /
+
+# AI / LLM crawlers are welcome
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://tasks-ai-inc.github.io/sitemap.xml
