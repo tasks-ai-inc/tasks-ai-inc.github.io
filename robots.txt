@@ -19,4 +19,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://tasks-ai-inc.github.io/sitemap.xml
+Sitemap: https://tasks.ai/sitemap.xml
