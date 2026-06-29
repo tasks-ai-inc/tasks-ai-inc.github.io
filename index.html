@@ -553,16 +553,14 @@
         <div style="display:flex;flex-direction:column;gap:12px;">
           <div style="font-family:var(--mono);font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--faint);margin-bottom:2px;">Get started</div>
           <a onClick="{{ openModal }}" style="font-size:14px;color:var(--dim);cursor:pointer;transition:color .15s;" onMouseEnter="{{ linkOn }}" onMouseLeave="{{ linkOff }}">Early access</a>
-          <a href="mailto:hello@tasks.ai" style="font-size:14px;color:var(--dim);transition:color .15s;" onMouseEnter="{{ linkOn }}" onMouseLeave="{{ linkOff }}">Contact us</a>
+          <a onClick="{{ openModal }}" style="font-size:14px;color:var(--dim);cursor:pointer;transition:color .15s;" onMouseEnter="{{ linkOn }}" onMouseLeave="{{ linkOff }}">Contact us</a>
         </div>
       </div>
     </div>
     <div style="max-width:1160px;margin:36px auto 0;padding-top:24px;border-top:1px solid var(--hairline);display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;">
       <span style="font-size:13px;color:var(--faint);">© 2026 Tasks.AI — All rights reserved.</span>
       <div style="display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;">
-        <a href="#" style="font-size:13px;color:var(--faint);transition:color .15s;" onMouseEnter="{{ linkOn }}" onMouseLeave="{{ linkOff }}">Privacy</a>
-        <a href="#" style="font-size:13px;color:var(--faint);transition:color .15s;" onMouseEnter="{{ linkOn }}" onMouseLeave="{{ linkOff }}">Terms</a>
-        <a href="mailto:hello@tasks.ai" style="font-size:13px;color:var(--faint);transition:color .15s;" onMouseEnter="{{ linkOn }}" onMouseLeave="{{ linkOff }}">Contact</a>
+        <a onClick="{{ openModal }}" style="font-size:13px;color:var(--faint);cursor:pointer;transition:color .15s;" onMouseEnter="{{ linkOn }}" onMouseLeave="{{ linkOff }}">Contact</a>
       </div>
     </div>
   </footer>
