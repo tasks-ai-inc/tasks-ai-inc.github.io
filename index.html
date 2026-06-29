@@ -139,14 +139,14 @@
           Teach once.<br><span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;">Automate forever.</span>
         </h1>
         <p data-reveal style="font-size:clamp(17px,1.4vw,19px);line-height:1.62;color:var(--dim);max-width:540px;margin:0 0 36px;">
-          Automating work has always meant writing software. Tasks.AI changes the unit of automation from <span style="color:var(--text);font-weight:600;">code</span> to <span style="color:var(--text);font-weight:600;">demonstration</span>. Show a digital coworker how you do a job — once — and it does it for you, forever: in your own browser, on your own accounts, with your data and know-how staying yours.
+          A <span style="color:var(--text);font-weight:600;">browser extension</span> that does your repetitive web work. Show it how you do a job — once, like training a coworker — and it runs on its own, forever: in your own browser, on your own accounts, with your data and know-how <span style="color:var(--text);font-weight:600;">staying yours</span>. Nothing to set up but the extension.
         </p>
         <div data-reveal style="display:flex;flex-wrap:wrap;gap:14px;margin-bottom:34px;">
           <button onClick="{{ openModal }}" style="border:none;cursor:pointer;font-family:var(--body);font-weight:600;font-size:16px;color:#fff;background:var(--grad);padding:15px 28px;border-radius:15px;box-shadow:0 10px 34px rgba(104,123,250,0.32);display:inline-flex;align-items:center;gap:10px;transition:transform .18s ease,box-shadow .18s ease;" onMouseEnter="{{ btnOn }}" onMouseLeave="{{ btnOff }}">Get Early Access <span style="font-size:18px;">→</span></button>
           <a href="#how" style="font-family:var(--body);font-weight:600;font-size:16px;color:var(--text);padding:15px 26px;border-radius:15px;border:1px solid var(--hairline);background:var(--surface-2);display:inline-flex;align-items:center;gap:9px;transition:border-color .18s,background .18s;" onMouseEnter="{{ ghostOn }}" onMouseLeave="{{ ghostOff }}">See how it works <span style="font-size:15px;">↓</span></a>
         </div>
         <div data-reveal style="display:flex;flex-wrap:wrap;gap:10px 22px;">
-          <sc-for list="{{ trustChips }}" as="chip" hint-placeholder-count="4">
+          <sc-for list="{{ trustChips }}" as="chip" hint-placeholder-count="3">
             <span style="display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--faint);">
               <span style="display:inline-flex;color:#5fd0ef;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"></path></svg></span>{{ chip }}
             </span>
@@ -187,6 +187,41 @@
   </header>
 
   <main>
+
+  <!-- PROBLEM-SIZE STRIP (framing, not a product claim) -->
+  <section style="background:var(--bg-deep);border-bottom:1px solid var(--hairline);padding:clamp(34px,4.5vw,48px) clamp(20px,5vw,56px);">
+    <div style="max-width:980px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px 1px;align-items:center;">
+      <div style="text-align:center;padding:0 18px;">
+        <div style="font-family:var(--disp);font-weight:700;font-size:clamp(34px,4.4vw,52px);line-height:1;letter-spacing:-0.02em;margin-bottom:10px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;">&gt;1&nbsp;billion</div>
+        <div style="font-size:14px;color:var(--dim);line-height:1.45;">knowledge workers spend their day in the browser</div>
+      </div>
+      <div style="text-align:center;padding:0 18px;border-left:1px solid var(--hairline);">
+        <div style="font-family:var(--disp);font-weight:700;font-size:clamp(34px,4.4vw,52px);line-height:1;letter-spacing:-0.02em;margin-bottom:10px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;">&gt;30%</div>
+        <div style="font-size:14px;color:var(--dim);line-height:1.45;">of it lost to the same repetitive web tasks</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WEDGES (the 3 core messages) -->
+  <section style="background:var(--bg);border-bottom:1px solid var(--hairline);padding:clamp(44px,6vw,68px) clamp(20px,5vw,56px);">
+    <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:30px;">
+      <div data-reveal style="display:flex;flex-direction:column;gap:12px;">
+        <span style="display:inline-flex;width:38px;height:38px;border-radius:10px;align-items:center;justify-content:center;background:rgba(123,108,255,0.12);border:1px solid rgba(123,108,255,0.22);color:#aab4ff;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"></rect><path d="M8 20h8M12 17v3"></path></svg></span>
+        <div style="font-family:var(--disp);font-weight:600;font-size:18px;">Nothing to install</div>
+        <div style="font-size:14.5px;line-height:1.55;color:var(--dim);">It's a browser extension. The browser is the runtime <em>and</em> the credential vault — no companion app, no API keys, no setup.</div>
+      </div>
+      <div data-reveal style="display:flex;flex-direction:column;gap:12px;">
+        <span style="display:inline-flex;width:38px;height:38px;border-radius:10px;align-items:center;justify-content:center;background:rgba(123,108,255,0.12);border:1px solid rgba(123,108,255,0.22);color:#aab4ff;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 4.4-3.2 7.9-8 9-4.8-1.1-8-4.6-8-9V7l8-4Z"></path></svg></span>
+        <div style="font-family:var(--disp);font-weight:600;font-size:18px;">Bring your own model</div>
+        <div style="font-size:14.5px;line-height:1.55;color:var(--dim);">Use a local model, your enterprise endpoint, or a hosted one. Your data and know-how never leave a perimeter you control.</div>
+      </div>
+      <div data-reveal style="display:flex;flex-direction:column;gap:12px;">
+        <span style="display:inline-flex;width:38px;height:38px;border-radius:10px;align-items:center;justify-content:center;background:rgba(123,108,255,0.12);border:1px solid rgba(123,108,255,0.22);color:#aab4ff;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"></path><path d="M18 16.5l1.6 1.6L23 15"></path></svg></span>
+        <div style="font-family:var(--disp);font-weight:600;font-size:18px;">Reliable by design</div>
+        <div style="font-size:14.5px;line-height:1.55;color:var(--dim);">Every task runs as a structured playbook, not free-form guessing — so it does the same thing, the same way, each time.</div>
+      </div>
+    </div>
+  </section>
 
 
   <!-- 2. MISSION BAND -->
@@ -255,7 +290,8 @@
   <section id="how" style="position:relative;background:var(--bg);padding:clamp(80px,11vw,150px) clamp(20px,5vw,56px);scroll-margin-top:80px;">
     <div style="max-width:1160px;margin:0 auto;">
       <div data-reveal style="font-family:var(--mono);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--faint);margin-bottom:18px;">How it works</div>
-      <h2 data-reveal style="font-family:var(--disp);font-weight:600;font-size:clamp(30px,4.4vw,52px);line-height:1.08;letter-spacing:-0.022em;margin:0 0 50px;">Show it once. It works forever.</h2>
+      <h2 data-reveal style="font-family:var(--disp);font-weight:600;font-size:clamp(30px,4.4vw,52px);line-height:1.08;letter-spacing:-0.022em;margin:0 0 22px;">Show it once. It works forever.</h2>
+      <p data-reveal style="font-size:clamp(16px,1.35vw,18px);line-height:1.62;color:var(--dim);max-width:720px;margin:0 0 50px;">Two ways to put it to work: <span style="color:var(--text);font-weight:600;">ask it to do a task once</span>, or — for the work you repeat — <span style="color:var(--text);font-weight:600;">teach it by showing it</span>. Teaching takes three steps:</p>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;">
         <sc-for list="{{ howSteps }}" as="h" hint-placeholder-count="3">
           <div data-reveal style="position:relative;border:1px solid var(--hairline);border-radius:20px;background:linear-gradient(180deg,var(--surface),rgba(12,12,22,0.6));padding:30px 26px 28px;overflow:hidden;transition:border-color .25s,transform .25s;" onMouseEnter="{{ cardOn }}" onMouseLeave="{{ cardOff }}">
@@ -841,7 +877,7 @@ class Component extends DCLogic {
           {label:'Marketplace', href:'#marketplace', desc:'An app store for work'}
         ]}
       ],
-      trustChips:["Teach, don't code","Runs on your machine","100% auditable","You own it"],
+      trustChips:["No install — the browser is the runtime","Bring your own LLM — your data stays yours","Reliable by design — structured playbooks, not hope"],
       problemTiles:[
         {icon:'⏳',title:'30% of the day, repeated',body:'A billion knowledge workers lose nearly a third of every day to the same browser chores — pulling reports, copying data, reconciling rows.'},
         {icon:'🧠',title:'They know how — they can\u2019t code it',body:'The people closest to the work understand it perfectly. They just don\u2019t write scripts, and they shouldn\u2019t have to.'},
