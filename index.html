@@ -560,6 +560,7 @@
     <div style="max-width:1160px;margin:36px auto 0;padding-top:24px;border-top:1px solid var(--hairline);display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;">
       <span style="font-size:13px;color:var(--faint);">© 2026 Tasks.AI — All rights reserved.</span>
       <div style="display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;">
+        <a href="privacy.html" style="font-size:13px;color:var(--faint);transition:color .15s;" onMouseEnter="{{ linkOn }}" onMouseLeave="{{ linkOff }}">Privacy</a>
         <a onClick="{{ openModal }}" style="font-size:13px;color:var(--faint);cursor:pointer;transition:color .15s;" onMouseEnter="{{ linkOn }}" onMouseLeave="{{ linkOff }}">Contact</a>
       </div>
     </div>
@@ -879,7 +880,8 @@ class Component extends DCLogic {
         {title:'For your team', items:[
           {label:'Use cases', href:'#usecases', desc:'Built for the work that runs the business'},
           {label:'Your know-how', href:'#knowhow', desc:'The asset you capture and keep'},
-          {label:'Marketplace', href:'#marketplace', desc:'An app store for work'}
+          {label:'Marketplace', href:'#marketplace', desc:'An app store for work'},
+          {label:'Privacy', href:'privacy.html', desc:'What we collect, and why'}
         ]}
       ],
       trustChips:["No install — the browser is the runtime","Bring your own LLM — your data stays yours","Reliable by design — structured playbooks, not hope"],
@@ -953,4 +955,3 @@ class Component extends DCLogic {
 </script>
 </body>
 </html>
-
