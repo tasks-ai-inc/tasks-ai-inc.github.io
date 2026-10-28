@@ -1,36 +1,27 @@
 # Tasks.AI
 
-> Teach once. Automate forever. Tasks.AI changes the unit of automation from code
-> to demonstration: show a digital coworker how you do a browser task once, and it
-> does it for you forever — in your own browser, on your own accounts, with your
-> data and know-how staying yours.
+> Teach once. Automate forever. Tasks.AI turns a screen recording of how you work into a versioned, runnable playbook: it extracts the tasks, decomposes them into reusable skills and actions, and runs them on your machine as you, or in an isolated VM. Every run is sandboxed, traced step by step and reproducible.
 
 ## What it is
-- Teach by demonstration (record a task while you talk through it), it learns the
-  goal, then runs hands-free — and self-heals when sites change.
-- Learn a task once (~$1, ~90s); replay it for free, for life, because it runs
-  locally on your machine.
-- Built on trust, not hope: you taught it, you can watch every step, it's verified,
-  repeatable, local, and yours to keep, edit, and share.
-- For the browser work that runs the business — finance, operations, RevOps, HR,
-  support — and anyone who can do the job in a browser.
+- A screen recording in, a versioned and runnable playbook out.
+- Structure: tasks, then skills, then actions, all reusable.
+- Runtime: a local agent that runs as you, or a disposable cloud microVM.
+- Trace: every step of a run is logged, with no black box.
+- For teams that spend hours every week on the same browser chores (reports, reconciliations, copy-paste between systems): you show Tasks.AI how you do one, once, and from then on it does it on your real accounts and tells you when it is done.
+- For executives: the way your people do the work is captured, turned into a digital workforce the company owns, and governed like any other asset (who may use it, which version is live, where it runs, what it costs).
 
-## Mission
-Make agentic AI accessible to everyone, so every company can capture, protect, and
-grow the know-how that makes it valuable.
+## Pages
+The landing page at https://tasks.ai/ has three versions of the same message, one for each reader: a builder (https://tasks.ai/builder.html), a team lead (https://tasks.ai/team-lead.html) and an executive (https://tasks.ai/executive.html). The address https://tasks.ai/ shows one of them, and every other address on the site redirects to it.
 
 ## Status
-Pre-launch. A skills marketplace ("an app store for work") is coming. Backed by a
-filed provisional patent (priority date January 23, 2026).
+Pre-launch, early access. Backed by a filed provisional patent (priority date January 23, 2026).
+
+## Early access
+https://dev.app.tasks.ai/
 
 ## Privacy
-Tasks.AI reads only the tabs a task is actually working in — not your browsing
-generally. No analytics, no advertising networks, no data brokers. Page content
-goes to open-weight models via OpenRouter; servers are on AWS us-east-1. What the
-assistant learns about a site is stripped of your values, stays inside your own
-organisation, and expires after 24 hours. Full policy: https://tasks.ai/privacy.html
+Policy: https://tasks.ai/privacy.html
 
 ## Links
 - Site: https://tasks.ai/
-- Privacy policy: https://tasks.ai/privacy.html
 - Contact: contact@tasks.ai

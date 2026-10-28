@@ -4,14 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="2;url=/">
+<link rel="canonical" href="https://tasks.ai/">
 <title>Page not found — Tasks.AI</title>
-<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&family=Manrope:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{ --bg:#0B0B14; --bg-deep:#08080F; --text:#F4F4F8; --dim:#9A9DAD; --faint:#6B6E7D;
-         --hairline:rgba(255,255,255,0.09); --surface-2:rgba(255,255,255,0.035);
          --grad:linear-gradient(100deg,#38C6F4 0%,#6B7BFA 46%,#A857F2 100%);
          --disp:'Space Grotesk',system-ui,sans-serif; --body:'Manrope',system-ui,sans-serif; --mono:'JetBrains Mono',monospace; }
   *{ box-sizing:border-box; }
@@ -27,14 +28,19 @@
   .home a{ font-family:var(--body); font-weight:600; color:#fff; background:var(--grad); text-decoration:none;
            padding:.8rem 1.5rem; border-radius:14px; display:inline-block; box-shadow:0 10px 30px rgba(104,123,250,0.32); }
 </style>
+<script>
+  // GitHub Pages cannot send a 301, so an unknown address is answered by this
+  // page (status 404, noindex) and sent to the landing page from here.
+  location.replace('/');
+</script>
 </head>
 <body>
   <div class="wrap">
-    <img class="mark" src="assets/logo_mark.png" alt="Tasks.AI">
+    <img class="mark" src="/assets/logo_mark.png" alt="Tasks.AI">
     <div class="code">404 — Page not found</div>
     <h1>This page doesn't exist</h1>
-    <p>The page you're looking for may have moved. Teach once, automate forever — let's get you back.</p>
-    <div class="home"><a data-home href="/">← Back to Tasks.AI</a></div>
+    <p>Teach once, automate forever. Taking you to Tasks.AI.</p>
+    <div class="home"><a href="/">← Back to Tasks.AI</a></div>
   </div>
 </body>
 </html>
