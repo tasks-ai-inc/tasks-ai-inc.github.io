@@ -31,7 +31,12 @@
 <script>
 /* Three audience versions of the landing page (builder, team lead, executive).
    Each visit to "/" shows a different one from the last visit on this browser,
-   and the "I'm ..." selector on each page links to a fixed version. */
+   and the "I'm ..." selector on each page links to a fixed version.
+   The Design Components runtime (support.js) re-reads location.href right after
+   it renders and swaps in whatever <x-dc> template that response holds. While
+   it starts, the address is therefore the version's own, never "/": a cached
+   copy of an older landing page at "/" must not be able to replace the page.
+   The address goes back to "/" once the page has loaded. */
 (function () {
   var versions = ['builder', 'team-lead', 'executive'];
   var last = null;
@@ -39,10 +44,13 @@
   var pool = versions.filter(function (v) { return v !== last; });
   var pick = pool[Math.floor(Math.random() * pool.length)];
   try { localStorage.setItem('tasksai-landing', pick); } catch (e) {}
-  if (location.search.indexOf('r=') > -1) { history.replaceState(null, '', '/'); }
   fetch('/' + pick + '.html', { cache: 'no-cache' })
     .then(function (r) { if (!r.ok) { throw new Error(r.status); } return r.text(); })
-    .then(function (html) { document.open(); document.write(html); document.close(); })
+    .then(function (html) {
+      history.replaceState(null, '', '/' + pick + '.html');
+      document.open(); document.write(html); document.close();
+      window.addEventListener('load', function () { history.replaceState(null, '', '/'); });
+    })
     .catch(function () { location.replace('/builder.html'); });
 })();
 </script>
