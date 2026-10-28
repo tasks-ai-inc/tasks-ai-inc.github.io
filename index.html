@@ -39,6 +39,7 @@
   var pool = versions.filter(function (v) { return v !== last; });
   var pick = pool[Math.floor(Math.random() * pool.length)];
   try { localStorage.setItem('tasksai-landing', pick); } catch (e) {}
+  if (location.search.indexOf('r=') > -1) { history.replaceState(null, '', '/'); }
   fetch('/' + pick + '.html', { cache: 'no-cache' })
     .then(function (r) { if (!r.ok) { throw new Error(r.status); } return r.text(); })
     .then(function (html) { document.open(); document.write(html); document.close(); })

@@ -30,8 +30,10 @@
 </style>
 <script>
   // GitHub Pages cannot send a 301, so an unknown address is answered by this
-  // page (status 404, noindex) and sent to the landing page from here.
-  location.replace('/');
+  // page (status 404, noindex) and sent to the landing page from here. The
+  // throwaway query makes the browser fetch "/" instead of reusing a cached
+  // copy of an older version; index.html removes it again.
+  location.replace('/?r=' + Date.now());
 </script>
 </head>
 <body>
