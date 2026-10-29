@@ -1,9 +1,9 @@
 # Tasks.AI
 
-> Teach once. Automate forever. Tasks.AI turns a screen recording of how you work into a versioned, runnable playbook: it extracts the tasks, decomposes them into reusable skills and actions, and runs them on your machine as you, or in an isolated VM. Every run is sandboxed, traced step by step and reproducible.
+> Teach once. Automate forever. Tasks.AI is the enterprise platform that puts AI to work for your teams. Each person teaches a job once, the way they would show a colleague.
 
 ## What it is
-- A screen recording in, a versioned and runnable playbook out.
+- Each person teaches a job once, and it becomes work the company owns, versioned and runnable.
 - Structure: tasks, then skills, then actions, all reusable.
 - Runtime: a local agent that runs as you, or a disposable cloud microVM.
 - Trace: every step of a run is logged, with no black box.
