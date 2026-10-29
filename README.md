@@ -16,7 +16,7 @@ executive.html   landing v5, for an executive     (Claude Design: "Landing v5 Ex
 privacy.html     the privacy policy               (Claude Design export + injected SEO head)
 404.html         unknown address: noindex, sent to "/"
 support.js       Design Components runtime (generated; do not edit)
-assets/          favicon.png, logo_full.png, logo_mark.png, og-cover-v5.png
+assets/          favicon.png, logo_full.png, logo_mark.png, og-cover-launch.png
 robots.txt  sitemap.xml  llms.txt  CNAME  .nojekyll   Pages + crawler essentials
 ```
 
